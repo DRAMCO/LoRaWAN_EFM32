@@ -16,14 +16,14 @@
 #define APP_ADR_ON                          1       // Whether we use Adaptive Data Rate or not
 #define APP_CONFIRMED_MSG_ON                0       // Whether this example will transmit confirmed or unconfirmed packets
 
-static uint8_t DevEui[] = LORAWAN_DEVICE_EUI;
-static uint8_t AppEui[] = LORAWAN_APPLICATION_EUI;
-static uint8_t AppKey[] = LORAWAN_APPLICATION_KEY;
-
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
     static uint8_t  AppSKey[] = LORAWAN_APPSKEY;
     static uint32_t DevAddr   = LORAWAN_DEVICE_ADDRESS;
+#else
+    static uint8_t DevEui[] = LORAWAN_DEVICE_EUI;
+    static uint8_t AppEui[] = LORAWAN_APPLICATION_EUI;
+    static uint8_t AppKey[] = LORAWAN_APPLICATION_KEY;
 #endif
 
 
@@ -108,6 +108,7 @@ static void OnTxNextPacketTimerEvent(void)
         else // We need to join before we can send data
             DeviceState = DEVICE_STATE_JOIN;
     }
+    GpioToggle(&Led1);
 }
 
 
@@ -204,7 +205,7 @@ int main( void )
                 MlmeReq_t mlmeReq;
 
                 // Initialize LoRaMac device unique ID
-                BoardGetUniqueId(DevEui);
+                //BoardGetUniqueId(DevEui);
 
                 mlmeReq.Type = MLME_JOIN;
                 mlmeReq.Req.Join.DevEui = DevEui;
