@@ -31,6 +31,21 @@
 #ifndef AES_H
 #define AES_H
 
+/* Modification by: Geoffrey Ottoy (KU Leuven)
+ * Use the Cortex M0 AES hardware. This results in a smaller code size and faster
+ * encryption.
+ *
+ * Comment this symbol if you want to use the standard implementation
+ */
+#define USE_AES_HW
+
+#ifdef USE_AES_HW
+#	include "em_aes.h"
+#	include "em_emu.h"
+#	include "em_cmu.h"
+#	include "em_assert.h"
+#endif
+
 #if 1
 #  define AES_ENC_PREKEYED  /* AES encryption with a precomputed key schedule  */
 #endif

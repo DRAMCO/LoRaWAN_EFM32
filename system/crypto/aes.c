@@ -197,8 +197,10 @@ static const uint8_t sbox[256]  =  sb_data(f1);
 static const uint8_t isbox[256] = isb_data(f1);
 #endif
 
+#ifndef USE_AES_HW
 static const uint8_t gfm2_sbox[256] = sb_data(f2);
 static const uint8_t gfm3_sbox[256] = sb_data(f3);
+#endif
 
 #if defined( AES_DEC_PREKEYED )
 static const uint8_t gfmul_9[256] = mm_data(f9);
@@ -372,7 +374,7 @@ static void xor_block( void *d, const void *s )
     ((uint8_t*)d)[15] ^= ((uint8_t*)s)[15];
 #endif
 }
-
+#ifndef USE_AES_HW
 static void copy_and_key( void *d, const void *s, const void *k )
 {
 #if defined( HAVE_UINT_32T )
@@ -423,6 +425,7 @@ static void shift_sub_rows( uint8_t st[N_BLOCK] )
     tt = st[15]; st[15] = s_box(st[11]); st[11] = s_box(st[ 7]);
     st[ 7] = s_box(st[ 3]); st[ 3] = s_box( tt );
 }
+#endif
 
 #if defined( AES_DEC_PREKEYED )
 
@@ -444,6 +447,7 @@ static void inv_shift_sub_rows( uint8_t st[N_BLOCK] )
 
 #endif
 
+#ifndef USE_AES_HW
 #if defined( VERSION_1 )
   static void mix_sub_columns( uint8_t dt[N_BLOCK] )
   { uint8_t st[N_BLOCK];
@@ -472,6 +476,7 @@ static void inv_shift_sub_rows( uint8_t st[N_BLOCK] )
     dt[14] = s_box(st[12]) ^ s_box(st[1]) ^ gfm2_sb(st[6]) ^ gfm3_sb(st[11]);
     dt[15] = gfm3_sb(st[12]) ^ s_box(st[1]) ^ s_box(st[6]) ^ gfm2_sb(st[11]);
   }
+#endif
 
 #if defined( AES_DEC_PREKEYED )
 
@@ -567,7 +572,58 @@ return_type aes_set_key( const uint8_t key[], length_type keylen, aes_context ct
 
 return_type aes_encrypt( const uint8_t in[N_BLOCK], uint8_t  out[N_BLOCK], const aes_context ctx[1] )
 {
-    if( ctx->rnd )
+/* Modification by: Geoffrey Ottoy (KU Leuven)
+ * Use the Cortex M0 AES hardware, which results in smaller code size and faster
+ * encryption (smaller energy consumption).	This is based on the "em_aes.c" source, however, some small
+ * changes were made to ensure the existing function calls can still be used (regardless of the hardware
+ * being used or not).
+ */
+#ifdef USE_AES_HW // G.O.: start of mod
+	EFM_ASSERT(!((uint32_t)in % 4));	// Checks whether "in" buffer uses 32-bit addresses alignment.
+										// If not, operation is halted.
+	EFM_ASSERT(!((uint32_t)out % 4));	// Checks whether "out" buffer uses 32-bit addresses alignment.
+										// If not, operation is halted.
+	// You might need to change the length of addressPad in the "AES_CMAC_CTX struct" (cmac.h).
+
+	int            i;
+	// Hardware requires 32-bit interfacing
+	uint32_t       *_out = (uint32_t *)out;
+	const uint32_t *_in  = (const uint32_t *)in;
+	const uint32_t *_key = (const uint32_t *)ctx->ksch;
+
+	// Enable AES hardware clock
+    CMU_ClockEnable(cmuClock_AES, true);
+
+    // Auto start on data write
+	AES->CTRL = AES_CTRL_DATASTART;
+
+	// Load key
+	for (i = 3; i >= 0; i--)
+	{
+	  AES->KEYLA = __REV(_key[i]);
+	}
+
+	// Load data to be encrypted
+	for (i = 3; i >= 0; i--)
+	{
+	  AES->DATA = __REV(_in[i]);
+	}
+
+	// Wait for completion
+	while (AES->STATUS & AES_STATUS_RUNNING);
+
+	// Save encrypted data
+	for (i = 3; i >= 0; i--)
+	{
+	  _out[i] = __REV(AES->DATA);
+	}
+	_out += 4;
+	_in  += 4;
+
+	// Disable AES hardware clock
+    CMU_ClockEnable(cmuClock_AES, false);
+#else // G.O. end of mod
+	if( ctx->rnd )
     {
         uint8_t s1[N_BLOCK], r;
         copy_and_key( s1, in, ctx->ksch );
@@ -589,6 +645,7 @@ return_type aes_encrypt( const uint8_t in[N_BLOCK], uint8_t  out[N_BLOCK], const
     }
     else
         return ( uint8_t )-1;
+#endif /*USE_AES_HW*/
     return 0;
 }
 
