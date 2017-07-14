@@ -70,6 +70,7 @@ typedef struct
  * Board MCU pins definitions
  */
 
+// RF LORA 868 connections
 #define RADIO_MOSI                                  PE_11
 #define RADIO_MISO                                  PE_10
 #define RADIO_SCLK                                  PE_12
@@ -80,17 +81,24 @@ typedef struct
 #define RADIO_DIO_1                                 PD_7
 #define RADIO_DIO_2                                 PC_1 // TODO: or PC_6?
 #define RADIO_DIO_3                                 PD_6
-#define RADIO_DIO_4                                 PA_1
-#define RADIO_DIO_5                                 PD_5
+#define RADIO_DIO_4                                 PA_5
+#define RADIO_DIO_5                                 PD_1
 
+#define RADIO_ANT_SWITCH_TX							PB_11
+#define RADIO_ANT_SWITCH_RX							PD_4
+
+// Wonder Gecko LEDs
 #define LED_0                                       PF_4
 #define LED_1                                       PF_5
+
+// Wonder Gecko push buttons
+#define BUTTON_0									PC_9
+#define BUTTON_1									PC_10
 
 #define I2C_SCL                                     NC
 #define I2C_SDA                                     NC
 
-#define RADIO_ANT_SWITCH_TX							PB_11
-#define RADIO_ANT_SWITCH_RX							PD_4
+
 
 
 /*!
@@ -112,7 +120,11 @@ extern Gpio_t TxEnSX9500;
 */
 extern Gpio_t Led0;
 extern Gpio_t Led1;
+extern Gpio_t Pb0;
+extern Gpio_t Pb1;
 
+extern void Button_0_ISR(void);
+extern void Button_1_ISR(void);
 /*!
  * Debug GPIO pins objects
  */

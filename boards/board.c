@@ -13,6 +13,7 @@ License: Revised BSD License, see LICENSE.TXT file include in the project
 Maintainer: Miguel Luis and Gregory Cristian
 */
 #include "board.h"
+#include "gpio.h"
 #include "em_device.h"
 
 //TODO temp
@@ -32,6 +33,9 @@ void assert_failed(uint8_t* file, uint32_t line)
 
 Gpio_t Led0;
 Gpio_t Led1;
+
+Gpio_t Pb0;
+Gpio_t Pb1;
 
 Adc_t Adc;
 I2c_t I2c;
@@ -111,12 +115,19 @@ void BoardEnableIrq( void )
 
 void BoardInitPeriph( void )
 {
+	/* Initialize LEDs */
 	GpioInit( &Led0, LED_0, PIN_OUTPUT, PIN_PUSH_PULL, PIN_NO_PULL, 0 );
 	GpioInit( &Led1, LED_1, PIN_OUTPUT, PIN_PUSH_PULL, PIN_NO_PULL, 0 );
 
 	// Switch LED 0 and 1 OFF
 	GpioWrite( &Led0, 0 );
 	GpioWrite( &Led1, 0 );
+
+	/* Initialize push buttons */
+	GpioInit( &Pb0, BUTTON_0, PIN_INPUT, PIN_PUSH_PULL, PIN_PULL_UP, 1 );
+	GpioInit( &Pb1, BUTTON_1, PIN_INPUT, PIN_PUSH_PULL, PIN_PULL_UP, 1 );
+	GpioSetInterrupt(&Pb0, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Button_0_ISR );
+	GpioSetInterrupt(&Pb1, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Button_1_ISR );
 }
 
 void BoardInitMcu( void )
