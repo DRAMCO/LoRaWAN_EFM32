@@ -6,7 +6,6 @@
 
 #include "LoRaMac.h"
 
-
 #define APP_TX_DUTYCYCLE                    15000   // Milliseconds between two transmissions
 #define APP_TX_DUTYCYCLE_RND                1000    // Random delay for application data transmission duty cycle [ms]
 #define APP_DEFAULT_DATARATE                DR_5    // SF7 - BW125
@@ -14,7 +13,7 @@
 #define APP_DATA_SIZE                       16      // Size of packets to transmit in this example
 #define APP_DATA_MAX_SIZE                   64      // Size of user data buffer
 #define APP_ADR_ON                          1       // Whether we use Adaptive Data Rate or not
-#define APP_CONFIRMED_MSG_ON                0       // Whether this example will transmit confirmed or unconfirmed packets
+#define APP_CONFIRMED_MSG_ON                1       // Whether this example will transmit confirmed or unconfirmed packets
 
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
@@ -39,7 +38,6 @@ static uint8_t      AppData[APP_DATA_MAX_SIZE]; // User application data
 static uint32_t     TxDutyCycleTime;            // Defines the application data transmission duty cycle
 static TimerEvent_t TxNextPacketTimer;          // Timer to handle the application data transmission duty cycle
 static bool         NextTx = true;              // Indicates if a new packet can be sent
-
 
 static void PrepareTxFrame(uint8_t port)
 {
@@ -108,7 +106,6 @@ static void OnTxNextPacketTimerEvent(void)
         else // We need to join before we can send data
             DeviceState = DEVICE_STATE_JOIN;
     }
-    GpioToggle(&Led1);
 }
 
 
@@ -142,7 +139,6 @@ static void MlmeConfirm(MlmeConfirm_t *mlmeConfirm)
 //{
 //}
 
-
 int main( void )
 {
     LoRaMacPrimitives_t LoRaMacPrimitives;
@@ -151,12 +147,6 @@ int main( void )
 
     BoardInitMcu();
     BoardInitPeriph();
-
-/*    uint8_t data[1] = {0x00};
-    while(1){
-    	BoardReadRegVersion(data);
-    	data[0] = 0x00;
-    }*/
 
     DeviceState = DEVICE_STATE_INIT;
     while (true)
@@ -183,6 +173,7 @@ int main( void )
                 // Set whether this is a public or private network
                 mibReq.Type = MIB_PUBLIC_NETWORK;
                 mibReq.Param.EnablePublicNetwork = LORAWAN_PUBLIC_NETWORK;
+               // mibReq.Param.UpLinkCounter
                 LoRaMacMibSetRequestConfirm( &mibReq );
 
                 // Add some channels other than the default 3 channels
@@ -253,7 +244,9 @@ int main( void )
                 if (NextTx)
                 {
                     PrepareTxFrame(APP_PORT);
+                    GpioWrite(&Led1, 1);
                     NextTx = SendFrame();
+                    GpioWrite(&Led1, 0);
                 }
 
                 // Schedule next packet transmission
@@ -272,4 +265,14 @@ int main( void )
             }
         }
     }
+}
+
+// This function is called when PB0 is pressed
+void Button_0_ISR(void){
+	GpioToggle(&Led0);
+}
+
+// This function is called when PB1 is pressed
+void Button_1_ISR(void){
+	//
 }
