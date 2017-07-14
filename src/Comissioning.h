@@ -19,7 +19,7 @@ Maintainer: Miguel Luis and Gregory Cristian
  * When set to 1 the application uses the Over-the-Air activation procedure
  * When set to 0 the application uses the Personalization activation procedure
  */
-#define OVER_THE_AIR_ACTIVATION                     0
+#define OVER_THE_AIR_ACTIVATION                     1
 
 /*!
  * Indicates if the end-device is to be connected to a private or public network
@@ -47,7 +47,7 @@ Maintainer: Miguel Luis and Gregory Cristian
 /*!
  * AES encryption/decryption cipher application key
  */
-//#define LORAWAN_APPLICATION_KEY                     { 0x6C, 0x66, 0xB4, 0x29, 0x31, 0x42, 0xCA, 0x74, 0x3E, 0x72, 0xEF, 0xD4, 0xC6, 0x14, 0x12, 0x90 }
+#define LORAWAN_APPLICATION_KEY                     { 0xDA, 0x37, 0xBB, 0xD0, 0x6B, 0x13, 0x10, 0x79, 0xBA, 0x56, 0x45, 0x8B, 0x1C, 0x80, 0x6D, 0xAF }
 /*!
  * Current network ID
  */
@@ -60,18 +60,15 @@ Maintainer: Miguel Luis and Gregory Cristian
  *         a pseudo random generator seeded with a value derived from
  *         BoardUniqueId value if LORAWAN_DEVICE_ADDRESS is set to 0
  */
-#define LORAWAN_DEVICE_ADDRESS                      ( uint32_t )0x26011415
+#define LORAWAN_DEVICE_ADDRESS                      ( uint32_t )0x2601133E
 
 /*!
  * AES encryption/decryption cipher network session key
  */
-#define LORAWAN_NWKSKEY                             { 0x43, 0x43, 0x9A, 0x33, 0x4C, 0x89, 0xDB, 0x6A, 0x19, 0x4D, 0x6B, 0x35, 0xAF, 0x07, 0xB9, 0x34 }
-
+#define LORAWAN_NWKSKEY                             { 0x52, 0x9A, 0x78, 0xBD, 0x1E, 0xDF, 0x46, 0xB1, 0x23, 0x76, 0x2F, 0x15, 0xE3, 0x86, 0x78, 0x91 }
 /*!
  * AES encryption/decryption cipher application session key
  */
-#define LORAWAN_APPSKEY                             { 0xB6, 0x64, 0x3D, 0x93, 0x86, 0xFE, 0xB4, 0xAB, 0x52, 0x50, 0x49, 0x90, 0x55, 0x5B, 0x81, 0x26 }
-
-
+#define LORAWAN_APPSKEY                             { 0xF9, 0x81, 0xA1, 0x5A, 0x75, 0x2F, 0xC0, 0xDA, 0x04, 0xDD, 0xEF, 0xF6, 0xD8, 0x85, 0x39, 0xFD }
 
 #endif // __LORA_COMMISSIONING_H__

@@ -266,7 +266,6 @@ void RtcEnterLowPowerStopMode( void )
 	{
 		//EMU_EnterEM1();
 
-
 		if (Radio.GetStatus() == RF_IDLE)
 			EMU_EnterEM2(true);
 		else

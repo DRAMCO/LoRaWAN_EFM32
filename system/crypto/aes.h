@@ -37,7 +37,7 @@
  *
  * Comment this symbol if you want to use the standard implementation
  */
-#define USE_AES_HW
+//#define USE_AES_HW
 
 #ifdef USE_AES_HW
 #	include "em_aes.h"

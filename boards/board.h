@@ -79,7 +79,7 @@ typedef struct
 
 #define RADIO_DIO_0                                 PC_0
 #define RADIO_DIO_1                                 PD_7
-#define RADIO_DIO_2                                 PC_1 // TODO: or PC_6?
+#define RADIO_DIO_2                                 PC_1
 #define RADIO_DIO_3                                 PD_6
 #define RADIO_DIO_4                                 PA_5
 #define RADIO_DIO_5                                 PD_1

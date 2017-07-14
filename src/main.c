@@ -108,7 +108,6 @@ static void OnTxNextPacketTimerEvent(void)
     }
 }
 
-
 static void McpsConfirm(McpsConfirm_t *mcpsConfirm)
 {
     // Packet was send (and we have waited for replies)
