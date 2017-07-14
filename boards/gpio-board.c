@@ -17,11 +17,16 @@ Maintainer: Miguel Luis and Gregory Cristian
 #include "em_gpio.h"
 #include "em_cmu.h"
 
-#define PIN_DIO_0    5
-#define PIN_DIO_1	12
-#define PIN_DIO_2    7 // TODO: or 6?
-#define PIN_DIO_3    3
-#define PIN_DIO_4    4
+#define PIN_DIO_0		0
+#define PIN_DIO_1   	7
+#define PIN_DIO_2   	1
+#define PIN_DIO_3   	6
+#define PIN_DIO_4   	5
+
+#define PIN_BUTTON_0   	9
+#define PIN_BUTTON_1   	10
+
+#define PIN_LIGHT_SENSE	2 // Future use
 
 static GpioIrqHandler *GpioIrq[16];
 
@@ -162,27 +167,32 @@ uint32_t GpioMcuRead( Gpio_t *obj )
 }
 
 void GPIO_ODD_IRQHandler(void)
- {
+{
 	uint32_t i = GPIO_IntGet();
 	GPIO_IntClear(0xAAAA);
 
-	if (i & (1 << PIN_DIO_0))
+	if (i & (1 << PIN_DIO_1))
 	{
-		if (GpioIrq[PIN_DIO_0] != NULL)
-			GpioIrq[PIN_DIO_0]();
+		if (GpioIrq[PIN_DIO_1] != NULL)
+			GpioIrq[PIN_DIO_1]();
 	}
 
-	// TODO: If PC6 instead of PD7 then this should be moved
 	if (i & (1 << PIN_DIO_2))
 	{
 		if (GpioIrq[PIN_DIO_2] != NULL)
 			GpioIrq[PIN_DIO_2]();
 	}
 
-	if (i & (1 << PIN_DIO_3))
+	if (i & (1 << PIN_DIO_4))
 	{
-		if (GpioIrq[PIN_DIO_3] != NULL)
-			GpioIrq[PIN_DIO_2]();
+		if (GpioIrq[PIN_DIO_4] != NULL)
+			GpioIrq[PIN_DIO_4]();
+	}
+
+	if (i & (1 << PIN_BUTTON_0))
+	{
+		if (GpioIrq[PIN_BUTTON_0] != NULL)
+			GpioIrq[PIN_BUTTON_0]();
 	}
  }
 
@@ -191,15 +201,27 @@ void GPIO_EVEN_IRQHandler(void)
 	uint32_t i = GPIO_IntGet();
 	GPIO_IntClear(0x5555);
 
-	if (i & (1 << PIN_DIO_1))
+	if (i & (1 << PIN_DIO_0))
 	{
-		if (GpioIrq[PIN_DIO_1] != NULL)
-			GpioIrq[PIN_DIO_1]();
+		if (GpioIrq[PIN_DIO_0] != NULL)
+			GpioIrq[PIN_DIO_0]();
 	}
 
-	if (i & (1 << PIN_DIO_4))
+	if (i & (1 << PIN_DIO_3))
 	{
-		if (GpioIrq[PIN_DIO_4] != NULL)
-			GpioIrq[PIN_DIO_4]();
+		if (GpioIrq[PIN_DIO_3] != NULL)
+			GpioIrq[PIN_DIO_3]();
+	}
+
+	if (i & (1 << PIN_BUTTON_1))
+	{
+		if (GpioIrq[PIN_BUTTON_1] != NULL)
+			GpioIrq[PIN_BUTTON_1]();
+	}
+
+	if (i & (1 << PIN_LIGHT_SENSE))
+	{
+		if (GpioIrq[PIN_LIGHT_SENSE] != NULL)
+			GpioIrq[PIN_LIGHT_SENSE]();
 	}
 }
