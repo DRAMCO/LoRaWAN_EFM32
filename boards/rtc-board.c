@@ -264,14 +264,13 @@ void RtcEnterLowPowerStopMode( void )
 {
 	if( ( LowPowerDisableDuringTask == false ) && ( RtcTimerEventAllowsLowPower == true ) )
 	{
-		EMU_EnterEM1();
+		//EMU_EnterEM1();
 
-		/*
+
 		if (Radio.GetStatus() == RF_IDLE)
 			EMU_EnterEM2(true);
 		else
 			EMU_EnterEM1();
-		*/
 	}
 }
 
