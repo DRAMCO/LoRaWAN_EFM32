@@ -18,7 +18,7 @@ Question mark behind the name means it&#39;s just a suggestion, but feel free to
 | Add ADC functionality | Jonas? | boards/adc-board.c | |
 | Add battery level reading | Jonas? |   | |
 | Add i2c sensor functionality |   | _New files:_ | |
-| Wonder Gecko: temperature &amp; humidity(Interrupt possible?) | Jonas? | system/humitemp.csystem/humitemp.h | |
+| Wonder Gecko: temperature &amp; humidity(Interrupt possible?) | Jonas? | system/humitemp.c<br>system/humitemp.h | |
 | Expansion board: light(Don&#39;t forget interrupt!) | Jonas? | system/light.csystem/light.h | |
 | LoRa payload formatting (PORT will define the sensor type) | Team? | src/main.cPrepareTxFrameFrame(…) | |
 | Check license to be used | [Gilles](https://github.com/GillesC) |   | done |
