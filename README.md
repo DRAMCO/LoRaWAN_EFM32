@@ -19,10 +19,10 @@ Question mark behind the name means it&#39;s just a suggestion, but feel free to
 | Add battery level reading | Jonas? |   | |
 | Add i2c sensor functionality |   | _New files:_ | |
 | Wonder Gecko: temperature &amp; humidity(Interrupt possible?) | Jonas? | system/humitemp.c<br>system/humitemp.h | |
-| Expansion board: light(Don&#39;t forget interrupt!) | Jonas? | system/light.csystem/light.h | |
-| LoRa payload formatting (PORT will define the sensor type) | Team? | src/main.cPrepareTxFrameFrame(…) | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expansion board: light(Don&#39;t forget interrupt!) | Jonas? | system/light.csystem/light.h | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LoRa payload formatting (PORT will define the sensor type) | Team? | src/main.cPrepareTxFrameFrame(…) | |
 | Check license to be used | [Gilles](https://github.com/GillesC) |   | done |
-| Format source files (comments to include license) | Team? | Check all files | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Format source files (comments to include license) | Team? | Check all files | |
 | Write example applications + walkthrough (workshop) | Team |   | |
 
 Feel free to expand on this list.
