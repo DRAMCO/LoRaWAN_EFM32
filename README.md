@@ -11,7 +11,7 @@ Question mark behind the name means it&#39;s just a suggestion, but feel free to
 
 | Description | Who | Files | Status |
 | --- | --- | --- | --- |
-| Remove unnecessary functionality: uart, usb uart, serial, gps (if possible remove files) | @GeoffreyOttoy | boards/uart-board.cboards/uart-board.hboards/uart-usb-board.cboards/uart-usb-board.hboards/uart-gps.cboards/uart-gps.csystem/gps.csystem/gps.hsystem/uart.csystem/uart.hsystem/serial.csystem/serial.h | |
+| Remove unnecessary functionality: uart, usb uart, serial, gps (if possible remove files) | @GeoffreyOttoy | boards/uart-board.c<br>boards/uart-board.h<br>boards/uart-usb-board.c<br>boards/uart-usb-board.h<br>boards/uart-gps.c<br>boards/uart-gps.c<br>system/gps.c<br>system/gps.h<br>system/uart.c<br>system/uart.h<br>system/serial.c<br>ystem/serial.h | |
 | Check AES HW problem (OTAA) | @GeoffreyOttoy ? | system/crypto/aes.c | |
 | Add EEPROM functionality | Jonas? | boards/eeprom-board.c | |
 | Add i2c functionality | Jonas | boards/i2c-board.c | |
