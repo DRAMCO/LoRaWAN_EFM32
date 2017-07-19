@@ -21,7 +21,7 @@ Question mark behind the name means it&#39;s just a suggestion, but feel free to
 | Wonder Gecko: temperature &amp; humidity(Interrupt possible?) | Jonas? | system/humitemp.csystem/humitemp.h | |
 | Expansion board: light(Don&#39;t forget interrupt!) | Jonas? | system/light.csystem/light.h | |
 | LoRa payload formatting (PORT will define the sensor type) | Team? | src/main.cPrepareTxFrameFrame(…) | |
-| Check license to be used | @GillesC |   | done |
+| Check license to be used | [Gilles](https://github.com/GillesC) |   | done |
 | Format source files (comments to include license) | Team? | Check all files | |
 | Write example applications + walkthrough (workshop) | Team |   | |
 
