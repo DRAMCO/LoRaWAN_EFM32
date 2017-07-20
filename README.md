@@ -5,7 +5,7 @@ More information soon.
 
 
 
-## TODO LoRa EFM32## 
+## TODO
 
 Question mark behind the name means it&#39;s just a suggestion, but feel free to already get started.
 
