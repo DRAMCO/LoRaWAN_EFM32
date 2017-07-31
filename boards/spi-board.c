@@ -33,7 +33,7 @@ void SpiInit( Spi_t *obj, PinNames mosi, PinNames miso, PinNames sclk, PinNames 
 
 	USART_InitSync_TypeDef init = USART_INITSYNC_DEFAULT;
 	obj->Spi.Init = init;
-	obj->Spi.Instance = USART0_BASE; // TODO: write a comment about this modification. It used to be USART1_BASE
+	obj->Spi.Instance = (void*)USART0_BASE;
 
     // Enable module clocks
 	CMU_ClockEnable(cmuClock_HFPER, true);
@@ -84,11 +84,11 @@ void SpiFrequency( Spi_t *obj, uint32_t hz )
 FlagStatus SpiGetFlag( Spi_t *obj, uint16_t flag )
 {
 	assert_param( FAIL );
+	return 0; // never reached
 }
 
 uint16_t SpiInOut( Spi_t *obj, uint16_t outData )
 {
-	// Geof tries to fiex iet
 	uint8_t data;
 	data = USART_SpiTransfer(USART_USED, outData);
 	return (uint16_t)data;

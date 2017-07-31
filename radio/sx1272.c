@@ -1034,7 +1034,7 @@ void SX1272SetOpMode( uint8_t opMode )
 
 void SX1272SetModem( RadioModems_t modem )
 {
-    assert_param( ( SX1272.Spi.Spi.Instance != NULL ) );
+	assert_param( ( SX1272.Spi.Spi.Instance != NULL ) );
 
     if( ( SX1272Read( REG_OPMODE ) & RFLR_OPMODE_LONGRANGEMODE_ON ) != 0 )
     {

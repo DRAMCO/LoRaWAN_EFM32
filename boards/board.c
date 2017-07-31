@@ -16,15 +16,6 @@ Maintainer: Miguel Luis and Gregory Cristian
 #include "gpio.h"
 #include "em_device.h"
 
-//TODO temp
-//#include "em_lcd.h"
-void assert_failed(uint8_t* file, uint32_t line)
-{
-	//lcd_write_string("ASSERT");
-	printf("Wrong parameters value: file %s on line %d\r\n", file, line);
-	while (1);
-}
-
 /*!
  * Unique Devices IDs register set ( EFM32GG )
  */
@@ -39,10 +30,6 @@ Gpio_t Pb1;
 
 Adc_t Adc;
 I2c_t I2c;
-Uart_t Uart1;
-#if defined( USE_USB_CDC )
-Uart_t UartUsb;
-#endif
 
 /*!
  * Initializes the unused GPIO to a know status
@@ -178,6 +165,7 @@ void BoardGetUniqueId( uint8_t *id )
 uint8_t BoardGetBatteryLevel( void )
 {
 	assert_param( FAIL );
+	return 0; // never reached
 }
 
 static void BoardUnusedIoInit( void )
@@ -206,12 +194,12 @@ void CalibrateSystemWakeupTime( void )
 
 void SystemClockReConfig( void )
 {
-	assert_param( FAIL );
+	assert_param(FAIL);
 }
 
 void SysTick_Handler( void )
 {
-	assert_param( FAIL );
+	assert_param(FAIL);
 }
 
 uint8_t GetBoardPowerSource( void )

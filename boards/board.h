@@ -16,6 +16,7 @@ Maintainer: Miguel Luis and Gregory Cristian
 #define __BOARD_H__
 
 #include "em_device.h"
+#include "em_assert.h"
 
 typedef struct
 {
@@ -39,20 +40,12 @@ typedef struct
 #include "adc.h"
 #include "spi.h"
 #include "i2c.h"
-#include "uart.h"
 #include "radio.h"
 #include "sx1272.h"
-#include "gps.h"
-#include "gps-board.h"
 #include "rtc-board.h"
 #include "sx1272-board.h"
-#include "uart-board.h"
 
-#define assert_param(expr) ((expr) ? (void)0 : assert_failed((uint8_t *)__FILE__, __LINE__))
-
-#if defined( USE_USB_CDC )
-#include "uart-usb-board.h"
-#endif
+#define assert_param(expr) (EFM_ASSERT( expr ))
 
 /*!
  * Generic definition
@@ -143,10 +136,6 @@ extern Gpio_t DbgPin5;
  */
 extern Adc_t Adc;
 extern I2c_t I2c;
-extern Uart_t Uart1;
-#if defined( USE_USB_CDC )
-extern Uart_t UartUsb;
-#endif
 
 /*
 extern Gpio_t GpsPps;
