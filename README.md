@@ -29,7 +29,7 @@ Question mark behind the name means it&#39;s just a suggestion, but feel free to
 | Add EEPROM functionality | Jonas? | `boards/eeprom-board.c` | |
 | Add i2c functionality | Jonas | `boards/i2c-board.c` | |
 | Add ADC functionality | Jonas? | `boards/adc-board.c` | |
-| Add battery level reading | Jonas? |   | |
+| Add battery level reading | Jonas? | `boards/board.c` in `BoardGetBatteryLevel()`  | |
 | Add i2c sensor functionality |   | _New files:_ | |
 | Wonder Gecko: temperature &amp; humidity <br>(Interrupt possible?) | Jonas? | `system/humitemp.c`<br>`system/humitemp.h` | |
 | * Expansion board: light <br>(Don&#39;t forget interrupt!) | Jonas? | `system/light.c`<br>`system/light.h` | |
