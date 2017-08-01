@@ -31,7 +31,7 @@ Question mark behind the name means it&#39;s just a suggestion, but feel free to
 | Add ADC functionality | Jonas? | `boards/adc-board.c` | |
 | Add battery level reading | Jonas? | `boards/board.c` in `BoardGetBatteryLevel()`  | |
 | Add i2c sensor functionality |   | _New files:_ | |
-| Wonder Gecko: temperature &amp; humidity <br>(Interrupt possible?) | Jonas? | `system/humitemp.c`<br>`system/humitemp.h` | |
+| Happy Gecko: temperature &amp; humidity <br>(Interrupt possible?) | Jonas? | `system/humitemp.c`<br>`system/humitemp.h` | |
 | * Expansion board: light <br>(Don&#39;t forget interrupt!) | Jonas? | `system/light.c`<br>`system/light.h` | |
 | * LoRa payload formatting (PORT will define the sensor type) | Team? | `src/main.c`<br>`PrepareTxFrame(…)` | |
 | Check license to be used | [Gilles](https://github.com/GillesC) |   | done |
