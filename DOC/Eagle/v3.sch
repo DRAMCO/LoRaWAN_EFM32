@@ -154,7 +154,7 @@
 </layers>
 <schematic xreflabel="%F%N/%S.%C%R" xrefpart="/%S.%C%R">
 <libraries>
-<library name="holes">
+<library name="holes" urn="urn:adsk.eagle:library:237">
 <description>&lt;b&gt;Mounting Holes and Pads&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
@@ -387,7 +387,7 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="supply1">
+<library name="supply1" urn="urn:adsk.eagle:library:371">
 <description>&lt;b&gt;Supply Symbols&lt;/b&gt;&lt;p&gt;
  GND, VCC, 0V, +5V, -5V, etc.&lt;p&gt;
  Please keep in mind, that these devices are necessary for the
@@ -503,7 +503,7 @@
 <text x="-9.525" y="10.795" size="1.27" layer="25">&gt;NAME</text>
 <text x="-9.525" y="-12.065" size="1.27" layer="27">&gt;VALUE</text>
 </package>
-<package name="ADPS-9200">
+<package name="APDS-9200">
 <smd name="1" x="-0.65" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
 <smd name="2" x="0" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
 <smd name="3" x="0.65" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
@@ -627,9 +627,7 @@
 </package>
 <package name="1X06/SMD">
 <smd name="5" x="3.81" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="3.81" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="1" x="-6.35" y="0" dx="0.762" dy="0.762" layer="1" roundness="100" rot="R90"/>
-<text x="-6.0325" y="0.15875" size="0.0254" layer="27" rot="R90">&gt;VALUE</text>
 <text x="-8.255" y="0" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 <polygon width="0.254" layer="1">
 <vertex x="-6.985" y="-0.79375"/>
@@ -642,13 +640,9 @@
 <vertex x="-5.55625" y="0"/>
 </polygon>
 <smd name="2" x="-3.81" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="-3.81" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="3" x="-1.27" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="-1.27" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="4" x="1.27" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="1.27" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="6" x="6.35" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="6.35" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <text x="8.89" y="0" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 <package name="MSOP8">
@@ -763,7 +757,7 @@
 <text x="-12.446" y="13.208" size="1.778" layer="95">&gt;NAME</text>
 <text x="-12.7" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
-<symbol name="ADPS-9200">
+<symbol name="APDS-9200">
 <pin name="VCC" x="-12.7" y="2.54" length="middle"/>
 <pin name="GND" x="-12.7" y="-2.54" length="middle"/>
 <pin name="SCL" x="12.7" y="2.54" length="middle" rot="R180"/>
@@ -896,12 +890,12 @@
 </device>
 </devices>
 </deviceset>
-<deviceset name="ADPS-9200">
+<deviceset name="APDS-9200">
 <gates>
-<gate name="G$1" symbol="ADPS-9200" x="0" y="0"/>
+<gate name="G$1" symbol="APDS-9200" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="ADPS-9200">
+<device name="" package="APDS-9200">
 <connects>
 <connect gate="G$1" pin="GND" pad="6"/>
 <connect gate="G$1" pin="INT" pad="4"/>
@@ -1007,7 +1001,7 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="con-coax">
+<library name="con-coax" urn="urn:adsk.eagle:library:133">
 <description>&lt;b&gt;Coax Connectors&lt;/b&gt;&lt;p&gt;
 Radiall  and M/A COM.&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
@@ -1110,10 +1104,11 @@ Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
 <text x="1.27" y="-8.89" size="1.778" layer="27">&gt;VALUE</text>
 <rectangle x1="-0.025" y1="-0.5" x2="4.05" y2="0.5" layer="51"/>
 </package>
-<package name="J502-ND-142-0701-871/876">
+<package name="J502-ND-142-0701-871/876" library_version="1">
 <description>&lt;b&gt;SMA 50 Ohm&lt;/b&gt; Board Thickness &lt;b&gt;0.062&lt;/b&gt; Inch, End Launch Jack Receptacle&lt;p&gt;
 Johnson Components&lt;br&gt;
 Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
+<wire x1="0" y1="5.588" x2="0" y2="-5.588" width="0" layer="20"/>
 <wire x1="-1.55" y1="-4.65" x2="-1.55" y2="-2" width="0.2032" layer="21"/>
 <wire x1="-1.55" y1="-2" x2="-3.7" y2="-2" width="0.2032" layer="21"/>
 <wire x1="-3.7" y1="-2" x2="-4.45" y2="-2.75" width="0.2032" layer="21"/>
@@ -1334,7 +1329,7 @@ Source: &lt;a href="http://emersonconnectivity.com/OA_MEDIA/drawings/dr-14207018
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="SMA-" prefix="X">
+<deviceset name="SMA-" prefix="X" library_version="1">
 <description>&lt;b&gt;SMA 50 Ohm&lt;/b&gt; End Launch Jack Receptacle - Round Contact&lt;p&gt;
 Johnson Components&lt;br&gt;
 Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
@@ -1472,7 +1467,7 @@ Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="rcl">
+<library name="rcl" urn="urn:adsk.eagle:library:334">
 <description>&lt;b&gt;Resistors, Capacitors, Inductors&lt;/b&gt;&lt;p&gt;
 Based on the previous libraries:
 &lt;ul&gt;
@@ -7178,7 +7173,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="frames">
+<library name="frames" urn="urn:adsk.eagle:library:229">
 <description>&lt;b&gt;Frames for Sheet and Layout&lt;/b&gt;</description>
 <packages>
 </packages>
@@ -7224,7 +7219,7 @@ DIN A4, landscape with location and doc. field</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="pinhead">
+<library name="pinhead" urn="urn:adsk.eagle:library:325">
 <description>&lt;b&gt;Pin Header Connectors&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
@@ -7564,7 +7559,7 @@ DIN A4, landscape with location and doc. field</description>
 <rectangle x1="2.159" y1="-2.921" x2="2.921" y2="-1.905" layer="21"/>
 <rectangle x1="4.699" y1="-2.921" x2="5.461" y2="-1.905" layer="21"/>
 </package>
-<package name="1_05X2MM">
+<package name="1_05X2MM" library_version="1">
 <description>CON-M-1X5-200</description>
 <text x="-4.5" y="1.5" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 <text x="-4.75" y="-2.75" size="1.27" layer="27">&gt;VALUE</text>
@@ -7584,7 +7579,7 @@ DIN A4, landscape with location and doc. field</description>
 <wire x1="-1.5" y1="-1" x2="-2.5" y2="-1" width="0.1524" layer="21"/>
 <wire x1="-2.5" y1="-1" x2="-3" y2="-0.5" width="0.1524" layer="21"/>
 <wire x1="-3" y1="0.5" x2="-3" y2="-0.5" width="0.1524" layer="21"/>
-<pad name="3" x="-2" y="0" drill="1.016" diameter="1.3" rot="R90"/>
+<pad name="3" x="0" y="0" drill="1.016" diameter="1.3" rot="R90"/>
 <rectangle x1="-2.254" y1="-0.254" x2="-1.746" y2="0.254" layer="51"/>
 <wire x1="-1" y1="0.5" x2="-0.5" y2="1" width="0.1524" layer="21"/>
 <wire x1="-0.5" y1="1" x2="0.5" y2="1" width="0.1524" layer="21"/>
@@ -7593,7 +7588,7 @@ DIN A4, landscape with location and doc. field</description>
 <wire x1="0.5" y1="-1" x2="-0.5" y2="-1" width="0.1524" layer="21"/>
 <wire x1="-0.5" y1="-1" x2="-1" y2="-0.5" width="0.1524" layer="21"/>
 <wire x1="-1" y1="0.5" x2="-1" y2="-0.5" width="0.1524" layer="21"/>
-<pad name="2" x="0" y="0" drill="1.016" diameter="1.3" rot="R90"/>
+<pad name="2" x="-2" y="0" drill="1.016" diameter="1.3" rot="R90"/>
 <rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
 <wire x1="1" y1="0.5" x2="1.5" y2="1" width="0.1524" layer="21"/>
 <wire x1="1.5" y1="1" x2="2.5" y2="1" width="0.1524" layer="21"/>
@@ -7761,7 +7756,7 @@ DIN A4, landscape with location and doc. field</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="PINHD-1X5" prefix="JP" uservalue="yes">
+<deviceset name="PINHD-1X5" prefix="JP" uservalue="yes" library_version="1">
 <description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
 <gates>
 <gate name="A" symbol="PINHD5" x="0" y="0"/>
@@ -9323,50 +9318,50 @@ Source: www.kingbright.com</description>
 </classes>
 <parts>
 <part name="JP1" library="project" deviceset="SMH-110-X2-XX-D" device=""/>
-<part name="GND2" library="supply1" deviceset="GND" device=""/>
-<part name="P+1" library="supply1" deviceset="VCC" device=""/>
+<part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="M1" library="project" deviceset="RF-LORA-868-SO" device=""/>
-<part name="P+2" library="supply1" deviceset="VCC" device=""/>
-<part name="X1" library="con-coax" deviceset="SMA-" device="142-0701-871/876"/>
-<part name="GND3" library="supply1" deviceset="GND" device=""/>
-<part name="C1" library="rcl" deviceset="C-EU" device="C0805K" value="10n"/>
-<part name="C2" library="rcl" deviceset="C-EU" device="C0805K" value="100n"/>
-<part name="P+3" library="supply1" deviceset="VCC" device=""/>
-<part name="GND4" library="supply1" deviceset="GND" device=""/>
-<part name="FRAME1" library="frames" deviceset="A4L-LOC" device=""/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="M0805" value="10k"/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="M0805" value="10k"/>
-<part name="R3" library="rcl" deviceset="R-EU_" device="M0805" value="10k"/>
-<part name="C5" library="rcl" deviceset="C-EU" device="C0805K" value="1u"/>
-<part name="GND5" library="supply1" deviceset="GND" device=""/>
-<part name="P+4" library="supply1" deviceset="VCC" device=""/>
-<part name="JP2" library="pinhead" deviceset="PINHD-1X3" device=""/>
-<part name="JP3" library="pinhead" deviceset="PINHD-1X6" device=""/>
-<part name="JP4" library="pinhead" deviceset="PINHD-1X4" device=""/>
-<part name="JP5" library="pinhead" deviceset="PINHD-1X5" device=""/>
-<part name="P+5" library="supply1" deviceset="VCC" device=""/>
-<part name="GND6" library="supply1" deviceset="GND" device=""/>
-<part name="IC1" library="project" deviceset="ADPS-9200" device=""/>
-<part name="H1" library="holes" deviceset="MOUNT-HOLE" device="3.0"/>
-<part name="H2" library="holes" deviceset="MOUNT-HOLE" device="3.0"/>
-<part name="H4" library="holes" deviceset="MOUNT-HOLE" device="3.0"/>
-<part name="H3" library="holes" deviceset="MOUNT-HOLE" device="3.0"/>
+<part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="X1" library="con-coax" library_urn="urn:adsk.eagle:library:133" deviceset="SMA-" device="142-0701-871/876"/>
+<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805K" value="10n"/>
+<part name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805K" value="100n"/>
+<part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="FRAME1" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device=""/>
+<part name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="M0805" value="10k"/>
+<part name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="M0805" value="10k"/>
+<part name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="M0805" value="10k"/>
+<part name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805K" value="1u"/>
+<part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X3" device=""/>
+<part name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X6" device=""/>
+<part name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X4" device=""/>
+<part name="JP5" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X5" device=""/>
+<part name="P+5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="IC1" library="project" deviceset="APDS-9200" device=""/>
+<part name="H1" library="holes" library_urn="urn:adsk.eagle:library:237" deviceset="MOUNT-HOLE" device="3.0"/>
+<part name="H2" library="holes" library_urn="urn:adsk.eagle:library:237" deviceset="MOUNT-HOLE" device="3.0"/>
+<part name="H4" library="holes" library_urn="urn:adsk.eagle:library:237" deviceset="MOUNT-HOLE" device="3.0"/>
+<part name="H3" library="holes" library_urn="urn:adsk.eagle:library:237" deviceset="MOUNT-HOLE" device="3.0"/>
 <part name="JP6" library="project" deviceset="PICKIT-HEADER" device="SMD-PADS"/>
 <part name="IC2" library="project" deviceset="PIC12LF1552" device=""/>
-<part name="GND1" library="supply1" deviceset="GND" device=""/>
-<part name="C3" library="rcl" deviceset="C-EU" device="C0805K" value="100n"/>
-<part name="P+6" library="supply1" deviceset="VCC" device=""/>
-<part name="GND7" library="supply1" deviceset="GND" device=""/>
-<part name="P+7" library="supply1" deviceset="VCC" device=""/>
-<part name="C4" library="rcl" deviceset="C-EU" device="C0805K" value="100n"/>
+<part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805K" value="100n"/>
+<part name="P+6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="P+7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="C-EU" device="C0805K" value="100n"/>
 <part name="IC3" library="project" deviceset="M24C01/02-X" device="TSSOP08"/>
-<part name="P+8" library="supply1" deviceset="VCC" device=""/>
-<part name="GND8" library="supply1" deviceset="GND" device=""/>
-<part name="GND9" library="supply1" deviceset="GND" device=""/>
+<part name="P+8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="GND8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="GND9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="CHIP-LED0805"/>
-<part name="R4" library="rcl" deviceset="R-EU_" device="M0805" value="3k3"/>
-<part name="GND10" library="supply1" deviceset="GND" device=""/>
-<part name="R5" library="rcl" deviceset="R-EU_" device="M0805" value="6k8"/>
+<part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="M0805" value="3k3"/>
+<part name="GND10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-EU_" device="M0805" value="6k8"/>
 </parts>
 <sheets>
 <sheet>

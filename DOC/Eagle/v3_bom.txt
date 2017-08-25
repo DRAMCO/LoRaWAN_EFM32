@@ -6,27 +6,28 @@ EAGLE Version 8.2.2 Copyright (c) 1988-2017 Autodesk, Inc.
 
 Assembly variant: 
 
-Part     Value                 Package                  Library  Position (mil)        Orientation
+Part     Value                 Package                  Library  Supplier   Ordernr          Price/piece
 
-C1       10n                   C0805K                   rcl      (1900 883.74016)      R270
-C2       100n                  C0805K                   rcl      (1805 883.74016)      R270
-C3       100n                  C0805K                   rcl      (1420 1908.74016)     R180
-C4       100n                  C0805K                   rcl      (1730 1908.74016)     R0
-C5       1u                    C0805K                   rcl      (1040 2118.74016)     R90
-IC1      ADPS-9200             ADPS-9200                project  (910 2028.74016)      R90
-IC2      PIC12LF1552           MSOP8                    project  (1420 1998.74016)     R90
-IC3      M24C01/02-XTSSOP08    TSSOP08                  project  (1740 1998.74016)     R90
-JP1      SMH-110-X2-XX-D       SMH-110-X2-XX-D          project  (433.07087 1161.41732) R270
-JP2                            1X03                     pinhead  (500 1928.74016)      R270
-JP3                            1X06                     pinhead  (1300 1678.74016)     R0
-JP4                            1X04                     pinhead  (705 858.74016)       R90
-JP5                            1X05                     pinhead  (1900 1328.74016)     R270
-JP6      PICKIT-HEADERSMD-PADS 1X06/SMD                 project  (1470 2223.11024)     MR0
-LED1                           CHIP-LED0805             led      (1900 1848.74016)     R0
-M1       RF-LORA-868-SO        RF-LORA-868-SO           project  (1300 1058.74016)     R180
-R1       10k                   M0805                    rcl      (1000 1878.74016)     R270
-R2       10k                   M0805                    rcl      (1080 1878.74016)     R270
-R3       10k                   M0805                    rcl      (710 1878.74016)      R270
-R4       3k3                   M0805                    rcl      (1900 1708.74016)     R270
-R5       6k8                   M0805                    rcl      (1730 2108.74016)     R0
-X1       SMA-142-0701-871/876  J502-ND-142-0701-871/876 con-coax (2155.35433 661.41732) R180
+C1       10n                   C0805K                   rcl      
+C2       100n                  C0805K                   rcl      
+C3       100n                  C0805K                   rcl      
+C4       100n                  C0805K                   rcl      
+C5       1u                    C0805K                   rcl      
+IC1      APDS-9200             APDS-9200                project  Mouser     630-APDS-9200	 1.37
+IC2      PIC12LF1552           MSOP8                    project  RS         799-0281		 0.559 (per 10)
+IC3      M24C01/02-XTSSOP08    TSSOP08                  project  RS         714-7575		 0.141 (per 25)
+JP1      SMH-110-X2-XX-D       SMH-110-X2-XX-D          project  Farnell    2019809          4.03
+JP2                            1X03                     pinhead
+JP3                            1X06                     pinhead
+JP4                            1X04                     pinhead  
+JP5                            1X05                     pinhead  
+JP6      PICKIT-HEADERSMD-PADS 1X06/SMD                 project  
+LED1                           CHIP-LED0805             led      RS         654-5773		 0.052 (per 50)
+M1       RF-LORA-868-SO        RF-LORA-868-SO           project  RS         903-3059		13.50
+R1       10k                   M0805                    rcl      
+R2       10k                   M0805                    rcl      
+R3       10k                   M0805                    rcl      
+R4       3k3                   M0805                    rcl      
+R5       6k8                   M0805                    rcl      
+X1       SMA-142-0701-871/876  J502-ND-142-0701-871/876 con-coax Farnell    2340523          4.77  (min. 10)
+A1		 Antenna 868 MHz       /                        /                   673-W5095       12,67  (min. 10)

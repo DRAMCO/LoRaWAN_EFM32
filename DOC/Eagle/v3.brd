@@ -9911,7 +9911,7 @@ Guus Leenders</text>
 <text x="11.557" y="53.181" size="1.27" layer="100" font="vector" ratio="15">I²C</text>
 </plain>
 <libraries>
-<library name="rcl">
+<library name="rcl" urn="urn:adsk.eagle:library:334">
 <description>&lt;b&gt;Resistors, Capacitors, Inductors&lt;/b&gt;&lt;p&gt;
 Based on the previous libraries:
 &lt;ul&gt;
@@ -10991,7 +10991,7 @@ MELF 0.10 W</description>
 </package>
 </packages>
 </library>
-<library name="holes">
+<library name="holes" urn="urn:adsk.eagle:library:237">
 <description>&lt;b&gt;Mounting Holes and Pads&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
@@ -11076,7 +11076,7 @@ MELF 0.10 W</description>
 <text x="-9.525" y="10.795" size="1.27" layer="25">&gt;NAME</text>
 <text x="-9.525" y="-12.065" size="1.27" layer="27">&gt;VALUE</text>
 </package>
-<package name="ADPS-9200">
+<package name="APDS-9200">
 <smd name="1" x="-0.65" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
 <smd name="2" x="0" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
 <smd name="3" x="0.65" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
@@ -11092,9 +11092,7 @@ MELF 0.10 W</description>
 </package>
 <package name="1X06/SMD">
 <smd name="5" x="3.81" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="3.81" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="1" x="-6.35" y="0" dx="0.762" dy="0.762" layer="1" roundness="100" rot="R90"/>
-<text x="-6.0325" y="0.15875" size="0.0254" layer="27" rot="R90">&gt;VALUE</text>
 <text x="-8.255" y="0" size="1.27" layer="25" rot="R90">&gt;NAME</text>
 <polygon width="0.254" layer="1">
 <vertex x="-6.985" y="-0.79375"/>
@@ -11107,13 +11105,9 @@ MELF 0.10 W</description>
 <vertex x="-5.55625" y="0"/>
 </polygon>
 <smd name="2" x="-3.81" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="-3.81" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="3" x="-1.27" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="-1.27" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="4" x="1.27" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="1.27" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <smd name="6" x="6.35" y="0" dx="1.524" dy="1.524" layer="1" roundness="100"/>
-<text x="6.35" y="0" size="0.0254" layer="27">&gt;VALUE</text>
 <text x="8.89" y="0" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
 </package>
 <package name="MSOP8">
@@ -11176,15 +11170,16 @@ MELF 0.10 W</description>
 </package>
 </packages>
 </library>
-<library name="con-coax">
+<library name="con-coax" urn="urn:adsk.eagle:library:133">
 <description>&lt;b&gt;Coax Connectors&lt;/b&gt;&lt;p&gt;
 Radiall  and M/A COM.&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
-<package name="J502-ND-142-0701-871/876">
+<package name="J502-ND-142-0701-871/876" library_version="1">
 <description>&lt;b&gt;SMA 50 Ohm&lt;/b&gt; Board Thickness &lt;b&gt;0.062&lt;/b&gt; Inch, End Launch Jack Receptacle&lt;p&gt;
 Johnson Components&lt;br&gt;
 Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
+<wire x1="0" y1="5.588" x2="0" y2="-5.588" width="0" layer="20"/>
 <wire x1="-1.55" y1="-4.65" x2="-1.55" y2="-2" width="0.2032" layer="21"/>
 <wire x1="-1.55" y1="-2" x2="-3.7" y2="-2" width="0.2032" layer="21"/>
 <wire x1="-3.7" y1="-2" x2="-4.45" y2="-2.75" width="0.2032" layer="21"/>
@@ -11218,7 +11213,7 @@ Source: www.johnsoncomponents.com .. J502-ND.pdf</description>
 </package>
 </packages>
 </library>
-<library name="pinhead">
+<library name="pinhead" urn="urn:adsk.eagle:library:325">
 <description>&lt;b&gt;Pin Header Connectors&lt;/b&gt;&lt;p&gt;
 &lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
 <packages>
@@ -11624,61 +11619,61 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="C1" library="rcl" package="C0805K" value="10n" x="48.26" y="22.447" smashed="yes" rot="R270">
+<element name="C1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" value="10n" x="48.26" y="22.447" smashed="yes" rot="R270">
 <attribute name="NAME" x="48.655" y="24.749" size="1.016" layer="25" font="vector" rot="R90"/>
 <attribute name="VALUE" x="46.36" y="23.447" size="1.016" layer="27" rot="R270"/>
 </element>
-<element name="C2" library="rcl" package="C0805K" value="100n" x="45.847" y="22.447" smashed="yes" rot="R270">
+<element name="C2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" value="100n" x="45.847" y="22.447" smashed="yes" rot="R270">
 <attribute name="NAME" x="46.242" y="24.749" size="1.016" layer="25" font="vector" rot="R90"/>
 <attribute name="VALUE" x="43.947" y="23.447" size="1.016" layer="27" rot="R270"/>
 </element>
 <element name="JP1" library="project" package="SMH-110-X2-XX-D" value="SMH-110-X2-XX-D" x="11" y="29.5" smashed="yes" rot="R270"/>
 <element name="M1" library="project" package="RF-LORA-868-SO" value="RF-LORA-868-SO" x="33.02" y="26.892" smashed="yes" rot="R180"/>
-<element name="X1" library="con-coax" package="J502-ND-142-0701-871/876" value="SMA-142-0701-871/876" x="54.746" y="16.8" smashed="yes" rot="R180">
+<element name="X1" library="con-coax" library_urn="urn:adsk.eagle:library:133" package="J502-ND-142-0701-871/876" value="SMA-142-0701-871/876" x="54.746" y="16.8" smashed="yes" rot="R180">
 <attribute name="MF" value="JOHNSON COMPONENTS" x="54.746" y="16.8" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="MPN" value="142-0701-871" x="54.746" y="16.8" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="OC_FARNELL" value="1339835" x="54.746" y="16.8" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="OC_NEWARK" value="91B6105" x="54.746" y="16.8" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="R1" library="rcl" package="M0805" value="10k" x="25.4" y="47.72" smashed="yes" rot="R270">
+<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" value="10k" x="25.4" y="47.72" smashed="yes" rot="R270">
 <attribute name="NAME" x="23.368" y="48.482" size="0.8128" layer="25" font="vector" rot="R270"/>
 </element>
-<element name="R2" library="rcl" package="M0805" value="10k" x="27.432" y="47.72" smashed="yes" rot="R270">
+<element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" value="10k" x="27.432" y="47.72" smashed="yes" rot="R270">
 <attribute name="NAME" x="28.702" y="48.482" size="0.8128" layer="25" font="vector" rot="R270"/>
 </element>
-<element name="R3" library="rcl" package="M0805" value="10k" x="18.034" y="47.72" smashed="yes" rot="R270">
+<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" value="10k" x="18.034" y="47.72" smashed="yes" rot="R270">
 <attribute name="NAME" x="19.304" y="48.482" size="0.8128" layer="25" font="vector" rot="R270"/>
 </element>
-<element name="C5" library="rcl" package="C0805K" value="1u" x="26.416" y="53.816" smashed="yes" rot="R90">
+<element name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" value="1u" x="26.416" y="53.816" smashed="yes" rot="R90">
 <attribute name="NAME" x="28.589" y="53.07" size="0.8128" layer="25" font="vector" rot="R90"/>
 </element>
-<element name="JP2" library="pinhead" package="1X03" value="" x="12.7" y="48.99" smashed="yes" rot="R270">
+<element name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X03" value="" x="12.7" y="48.99" smashed="yes" rot="R270">
 <attribute name="VALUE" x="9.525" y="52.8" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="JP3" library="pinhead" package="1X06" value="" x="33.02" y="42.64" smashed="yes">
+<element name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X06" value="" x="33.02" y="42.64" smashed="yes">
 <attribute name="VALUE" x="25.4" y="39.465" size="1.27" layer="27"/>
 </element>
-<element name="JP4" library="pinhead" package="1X04" value="" x="17.907" y="21.812" smashed="yes" rot="R90">
+<element name="JP4" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X04" value="" x="17.907" y="21.812" smashed="yes" rot="R90">
 <attribute name="VALUE" x="21.082" y="16.732" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="JP5" library="pinhead" package="1X05" value="" x="48.26" y="33.75" smashed="yes" rot="R270">
+<element name="JP5" library="pinhead" library_urn="urn:adsk.eagle:library:325" package="1X05" value="" x="48.26" y="33.75" smashed="yes" rot="R270">
 <attribute name="VALUE" x="45.085" y="40.1" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="IC1" library="project" package="ADPS-9200" value="ADPS-9200" x="23.114" y="51.53" smashed="yes" rot="R90">
+<element name="IC1" library="project" package="APDS-9200" value="APDS-9200" x="23.114" y="51.53" smashed="yes" rot="R90">
 <attribute name="NAME" x="22.368" y="53.138" size="0.8128" layer="25" font="vector"/>
 </element>
-<element name="H1" library="holes" package="3,0" value="MOUNT-HOLE3.0" x="3" y="3"/>
-<element name="H2" library="holes" package="3,0" value="MOUNT-HOLE3.0" x="52" y="3"/>
-<element name="H4" library="holes" package="3,0" value="MOUNT-HOLE3.0" x="3" y="56"/>
-<element name="H3" library="holes" package="3,0" value="MOUNT-HOLE3.0" x="52" y="56"/>
+<element name="H1" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0" value="MOUNT-HOLE3.0" x="3" y="3"/>
+<element name="H2" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0" value="MOUNT-HOLE3.0" x="52" y="3"/>
+<element name="H4" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0" value="MOUNT-HOLE3.0" x="3" y="56"/>
+<element name="H3" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0" value="MOUNT-HOLE3.0" x="52" y="56"/>
 <element name="JP6" library="project" package="1X06/SMD" value="PICKIT-HEADERSMD-PADS" x="37.338" y="56.467" smashed="yes" rot="MR0"/>
 <element name="IC2" library="project" package="MSOP8" value="PIC12LF1552" x="36.068" y="50.768" smashed="yes" rot="R90">
 <attribute name="NAME" x="37.25" y="53.19" size="0.8128" layer="25" font="vector" rot="R180"/>
 </element>
-<element name="C3" library="rcl" package="C0805K" value="100n" x="36.068" y="48.482" smashed="yes" rot="R180">
+<element name="C3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" value="100n" x="36.068" y="48.482" smashed="yes" rot="R180">
 <attribute name="NAME" x="36.814" y="47.099" size="0.8128" layer="25" font="vector" rot="R180"/>
 </element>
-<element name="C4" library="rcl" package="C0805K" value="100n" x="43.942" y="48.482" smashed="yes">
+<element name="C4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="C0805K" value="100n" x="43.942" y="48.482" smashed="yes">
 <attribute name="NAME" x="43.196" y="46.563" size="0.8128" layer="25" font="vector"/>
 </element>
 <element name="IC3" library="project" package="TSSOP08" value="M24C01/02-XTSSOP08" x="44.196" y="50.768" smashed="yes" rot="R90">
@@ -11688,10 +11683,10 @@ design rules under a new name.</description>
 <attribute name="NAME" x="50.292" y="45.688" size="0.8128" layer="25" font="vector" rot="R90"/>
 <attribute name="VALUE" x="50.8" y="45.688" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="R4" library="rcl" package="M0805" value="3k3" x="48.26" y="43.402" smashed="yes" rot="R270">
+<element name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" value="3k3" x="48.26" y="43.402" smashed="yes" rot="R270">
 <attribute name="NAME" x="49.53" y="44.164" size="0.8128" layer="25" font="vector" rot="R270"/>
 </element>
-<element name="R5" library="rcl" package="M0805" value="6k8" x="43.942" y="53.562" smashed="yes">
+<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="M0805" value="6k8" x="43.942" y="53.562" smashed="yes">
 <attribute name="NAME" x="43.18" y="54.832" size="0.8128" layer="25" font="vector"/>
 </element>
 </elements>

@@ -203,7 +203,7 @@
 <text x="-9.525" y="10.795" size="1.27" layer="25">&gt;NAME</text>
 <text x="-9.525" y="-12.065" size="1.27" layer="27">&gt;VALUE</text>
 </package>
-<package name="ADPS-9200">
+<package name="APDS-9200">
 <smd name="1" x="-0.65" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
 <smd name="2" x="0" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
 <smd name="3" x="0.65" y="-0.65" dx="0.8128" dy="0.4064" layer="1" rot="R90"/>
@@ -457,7 +457,7 @@
 <text x="-12.446" y="13.208" size="1.778" layer="95">&gt;NAME</text>
 <text x="-12.7" y="-12.7" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
-<symbol name="ADPS-9200">
+<symbol name="APDS-9200">
 <pin name="VCC" x="-12.7" y="2.54" length="middle"/>
 <pin name="GND" x="-12.7" y="-2.54" length="middle"/>
 <pin name="SCL" x="12.7" y="2.54" length="middle" rot="R180"/>
@@ -590,12 +590,12 @@
 </device>
 </devices>
 </deviceset>
-<deviceset name="ADPS-9200">
+<deviceset name="APDS-9200">
 <gates>
-<gate name="G$1" symbol="ADPS-9200" x="0" y="0"/>
+<gate name="G$1" symbol="APDS-9200" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="ADPS-9200">
+<device name="" package="APDS-9200">
 <connects>
 <connect gate="G$1" pin="GND" pad="6"/>
 <connect gate="G$1" pin="INT" pad="4"/>
