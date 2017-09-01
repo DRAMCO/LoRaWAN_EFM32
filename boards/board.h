@@ -64,6 +64,8 @@ typedef struct
  */
 
 // RF LORA 868 connections
+#ifdef HW_VERSION_3
+// TODO: Needs to be checked
 #define RADIO_MOSI                                  PE_11
 #define RADIO_MISO                                  PE_10
 #define RADIO_SCLK                                  PE_12
@@ -91,6 +93,36 @@ typedef struct
 #define I2C_SCL                                     NC
 #define I2C_SDA                                     NC
 
+#else /*HW_VERSION_1 or HW_VERSION_2 */
+
+#define RADIO_MOSI                                  PE_11
+#define RADIO_MISO                                  PE_10
+#define RADIO_SCLK                                  PE_12
+#define RADIO_NSS                                   PE_13
+#define RADIO_RESET                                 PA_2
+
+#define RADIO_DIO_0                                 PC_0
+#define RADIO_DIO_1                                 PD_7
+#define RADIO_DIO_2                                 PC_1
+#define RADIO_DIO_3                                 PD_6
+#define RADIO_DIO_4                                 PA_5
+#define RADIO_DIO_5                                 PA_1
+
+#define RADIO_ANT_SWITCH_TX							PB_11
+#define RADIO_ANT_SWITCH_RX							PD_4
+
+// Wonder Gecko LEDs
+#define LED_0                                       PF_4
+#define LED_1                                       PF_5
+
+// Wonder Gecko push buttons
+#define BUTTON_0									PC_9
+#define BUTTON_1									PC_10
+
+#define I2C_SCL                                     NC
+#define I2C_SDA                                     NC
+
+#endif /* HW_VERSION_3 */
 
 
 

@@ -1,19 +1,26 @@
 #include <string.h>
 #include <math.h>
 
-#include "Comissioning.h"
+#include "Comissioning_geoff.h"
 #include "board.h"
 
 #include "LoRaMac.h"
 
+#include <time.h>
+#include <stdlib.h>
+
+
+
 #define APP_TX_DUTYCYCLE                    15000   // Milliseconds between two transmissions
 #define APP_TX_DUTYCYCLE_RND                1000    // Random delay for application data transmission duty cycle [ms]
 #define APP_DEFAULT_DATARATE                DR_5    // SF7 - BW125
-#define APP_PORT                            2       // Application port
-#define APP_DATA_SIZE                       16      // Size of packets to transmit in this example
+#define APP_PORT                            1       // Application port
+#define APP_DATA_SIZE                       2      // Size of packets to transmit in this example
 #define APP_DATA_MAX_SIZE                   64      // Size of user data buffer
 #define APP_ADR_ON                          1       // Whether we use Adaptive Data Rate or not
 #define APP_CONFIRMED_MSG_ON                1       // Whether this example will transmit confirmed or unconfirmed packets
+
+#define RAND_MAX 							30
 
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
@@ -34,15 +41,16 @@ static enum eDevicState
     DEVICE_STATE_SLEEP
 } DeviceState;
 
-static uint8_t      AppData[APP_DATA_MAX_SIZE]; // User application data
+static uint8_t     AppData[APP_DATA_MAX_SIZE]; // User application data
 static uint32_t     TxDutyCycleTime;            // Defines the application data transmission duty cycle
 static TimerEvent_t TxNextPacketTimer;          // Timer to handle the application data transmission duty cycle
 static bool         NextTx = true;              // Indicates if a new packet can be sent
 
 static void PrepareTxFrame(uint8_t port)
 {
-    for (unsigned int i = 0; i < APP_DATA_SIZE; ++i)
-        AppData[i] = i;
+		int16_t temp = rand() % RAND_MAX;
+        AppData[0] = (uint8_t)(temp >> 8);
+        AppData[1] = (uint8_t)(temp & 0xFF);
 }
 
 static bool SendFrame(void)
@@ -146,6 +154,9 @@ int main( void )
 
     BoardInitMcu();
     BoardInitPeriph();
+
+    srand(time(NULL));   // should only be called once
+
 
     DeviceState = DEVICE_STATE_INIT;
     while (true)
