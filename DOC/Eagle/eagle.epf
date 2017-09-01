@@ -276,6 +276,13 @@ UsedLibraryUrn="urn:adsk.eagle:library:417"
 UsedLibraryUrn="urn:adsk.eagle:library:112"
 UsedLibraryUrn="urn:adsk.eagle:library:418"
 UsedLibraryUrn="urn:adsk.eagle:library:419"
+UsedLibraryUrn="urn:adsk.eagle:library:524"
+UsedLibraryUrn="urn:adsk.eagle:library:420"
+UsedLibraryUrn="urn:adsk.eagle:library:520"
+UsedLibraryUrn="urn:adsk.eagle:library:522"
+UsedLibraryUrn="urn:adsk.eagle:library:521"
+UsedLibraryUrn="urn:adsk.eagle:library:527"
+UsedLibraryUrn="urn:adsk.eagle:library:523"
 UsedLibraryUrn="urn:adsk.eagle:library:113"
 UsedLibraryUrn="urn:adsk.eagle:library:114"
 UsedLibraryUrn="urn:adsk.eagle:library:115"
@@ -350,11 +357,17 @@ UsedLibraryUrn="urn:adsk.eagle:library:177"
 UsedLibrary="project.lbr"
 
 [Win_1]
+Type="Control Panel"
+Loc="0 0 1679 986"
+State=1
+Number=0
+
+[Win_2]
 Type="Schematic Editor"
-Loc="-8 -31 1191 568"
-State=0
-Number=2
-File="C:/Users/Geoffrey/Documents/eagle/LoRa_Gecko/v2.sch"
+Loc="-8 -8 1671 978"
+State=1
+Number=1
+File="v3.sch"
 View="-5.73116 -4.10556 265.873 182.968"
 WireWidths=" 0.0762 0.1016 0.127 0.15 0.2 0.2032 0.254 0.3048 0.4064 0.508 0.6096 0.8128 1.016 1.27 2.54 0.1524"
 PadDiameters=" 0.254 0.3048 0.4064 0.6096 0.8128 1.016 1.27 1.4224 1.6764 1.778 1.9304 2.1844 2.54 3.81 6.4516 0"
@@ -396,13 +409,7 @@ PadsSameType=0
 Layer=91
 Sheet="1"
 
-[Win_2]
-Type="Control Panel"
-Loc="0 0 1679 986"
-State=2
-Number=0
-
 [Desktop]
-Screen="1680 1050"
+Screen="3360 1050"
 Window="Win_1"
 Window="Win_2"

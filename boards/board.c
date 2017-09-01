@@ -115,6 +115,9 @@ void BoardInitPeriph( void )
 	GpioInit( &Pb1, BUTTON_1, PIN_INPUT, PIN_PUSH_PULL, PIN_PULL_UP, 1 );
 	GpioSetInterrupt(&Pb0, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Button_0_ISR );
 	GpioSetInterrupt(&Pb1, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Button_1_ISR );
+
+	/* Init I2c */
+
 }
 
 void BoardInitMcu( void )
