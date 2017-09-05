@@ -1,0 +1,3 @@
+[submodule "DOC/I2C_OutputMux"]
+	path = DOC/I2C_OutputMux
+	url = https://github.com/DRAMCO/I2C_OutputMux
