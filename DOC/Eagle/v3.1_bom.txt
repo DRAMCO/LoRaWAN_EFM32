@@ -1,0 +1,33 @@
+Partlist
+
+Exported from v3.brd at 23/08/2017 9:41
+
+EAGLE Version 8.2.2 Copyright (c) 1988-2017 Autodesk, Inc.
+
+Assembly variant: 
+
+Part     Value                 Package                  Library  Supplier   Ordernr          Price/piece
+
+C1       10n                   C0805K                   rcl      
+C2       100n                  C0805K                   rcl      
+C3       100n                  C0805K                   rcl      
+C4       100n                  C0805K                   rcl      
+C5       1u                    C0805K                   rcl      
+IC1      APDS-9200             APDS-9200                project  Mouser     630-APDS-9200    1.37
+IC2      PIC12LF1552           MSOP8                    project  RS         799-0281	     0.559 (per 10)
+IC3      M24C01/02-XTSSOP08    TSSOP08                  project  RS         714-7575	     0.141 (per 25)
+JP1      SMH-110-X2-XX-D       SMH-110-X2-XX-D          project  Farnell    2019809          4.03
+JP2                            1X03                     pinhead
+JP3                            1X06                     pinhead
+JP4                            1X04                     pinhead  
+JP5                            1X05                     pinhead  
+JP6      PICKIT-HEADERSMD-PADS 1X06/SMD                 project  
+LED1                           CHIP-LED0805             led      RS         654-5773	     0.052 (per 50)
+M1       RF-LORA-868-SO        RF-LORA-868-SO           project  RS         903-3059	    13.50
+R1       4k7                   M0805                    rcl      
+R2       4k7                   M0805                    rcl      
+R3       4k7                   M0805                    rcl      
+R4       1k2                   M0805                    rcl      
+R5       6k8                   M0805                    rcl      
+X1       SMA-142-0701-871/876  J502-ND-142-0701-871/876 con-coax Farnell    2340523          4.77  (min. 10)
+A1	 Antenna 868 MHz       /                        /        RS         542-563          5.19
