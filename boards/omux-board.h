@@ -10,12 +10,11 @@
  *   Gebroeders De Smetstraat 1,
  *   B-9000 Gent, Belgium
  *
- *         File: omux-board.c
+ *         File: omux-board.h
  *      Created: 2017-09-19
  *       Author: Geoffrey Ottoy
  *
- *  Description: Functions to control the EFM32 Wonder Gecko
- *  	LoRa Extension Board I2C output mux.
+ *  Description: Header for omux-board.c
  */
 
 #ifndef BOARDS_OMUX_BOARD_H_

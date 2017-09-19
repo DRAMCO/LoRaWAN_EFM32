@@ -61,16 +61,37 @@ uint8_t I2cMcuWriteBuffer( I2c_t *obj, uint8_t deviceAddr, uint16_t addr, uint8_
 
 	ret = I2CSPM_Transfer(obj->I2c.Instance, &seq);
 	if (ret != i2cTransferDone){
-		return false;
+		return FAIL;
 	}
 
 	return SUCCESS;
 }
 
-uint8_t I2cMcuReadBuffer( I2c_t *obj, uint8_t deviceAddr, uint16_t addr, uint8_t *buffer, uint16_t size )
+uint8_t I2cMcuReadBuffer( I2c_t *obj, uint8_t deviceAddr, uint16_t regAddr, uint8_t *buffer, uint16_t size )
 {
-	assert_param(FAIL);
-	return FAIL;
+	I2C_TransferSeq_TypeDef    seq;
+	I2C_TransferReturn_TypeDef ret;
+	uint8_t                    i2c_write_data[1];
+
+	seq.addr  = deviceAddr;
+	seq.flags = I2C_FLAG_WRITE_READ;
+	/* Select command to issue */
+	i2c_write_data[0] = (uint8_t) regAddr;
+	seq.buf[0].data   = i2c_write_data;
+	seq.buf[0].len    = 1;
+	/* Select location/length of data to be read */
+	seq.buf[1].data = buffer;
+	seq.buf[1].len  = size;
+
+	ret = I2CSPM_Transfer(obj->I2c.Instance, &seq);
+
+	if (ret != i2cTransferDone)
+	{
+		*buffer = 0;
+		return FAIL;
+	}
+
+	return SUCCESS;
 }
 
 uint8_t I2cMcuWaitStandbyState( I2c_t *obj, uint8_t deviceAddr )

@@ -28,6 +28,8 @@ Gpio_t Led1;
 Gpio_t Pb0;
 Gpio_t Pb1;
 
+Gpio_t Si7021_Enable;
+
 Adc_t Adc;
 I2c_t I2c;
 
@@ -116,8 +118,14 @@ void BoardInitPeriph( void )
 	GpioSetInterrupt(&Pb0, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Button_0_ISR );
 	GpioSetInterrupt(&Pb1, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Button_1_ISR );
 
-	/* Init I2c */
+#ifdef HW_VERSION_3
+	/* Enable Si7021 temperature and humidity sensor */
+	GpioInit( &Si7021_Enable, SI7021_ENABLE, PIN_OUTPUT, PIN_PUSH_PULL, PIN_NO_PULL, 1);
+	GpioWrite( &Si7021_Enable, 1 );
 
+	/* Init I2c */
+    I2cInit(&I2c, I2C_SCL, I2C_SDA);
+#endif
 }
 
 void BoardInitMcu( void )
