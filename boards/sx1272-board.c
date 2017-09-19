@@ -16,6 +16,9 @@ Maintainer: Miguel Luis and Gregory Cristian
 #include "radio.h"
 #include "sx1272.h"
 #include "sx1272-board.h"
+#ifdef HW_VERSION_3
+#include "omux-board.h"
+#endif
 
 /*!
  * Flag used to set the RF switch control pins in low power mode when the radio is not active.
@@ -177,14 +180,20 @@ void SX1272SetAntSwLowPower( bool status )
 
 void SX1272AntSwInit( void )
 {
+#ifndef HW_VERSION_3
     GpioInit( &AntTx, RADIO_ANT_SWITCH_TX, PIN_OUTPUT, PIN_PUSH_PULL, PIN_PULL_UP, 0 );
     GpioInit( &AntRx, RADIO_ANT_SWITCH_RX, PIN_OUTPUT, PIN_PUSH_PULL, PIN_PULL_UP, 1 );
+#else
+    OMuxAntInit(&I2c);
+#endif
 }
 
 void SX1272AntSwDeInit( void )
 {
+#ifndef HW_VERSION_3
     GpioInit( &AntTx, RADIO_ANT_SWITCH_TX, PIN_ANALOGIC, PIN_PUSH_PULL, PIN_NO_PULL, 0 );
     GpioInit( &AntRx, RADIO_ANT_SWITCH_RX, PIN_ANALOGIC, PIN_PUSH_PULL, PIN_NO_PULL, 0 );
+#endif
 }
 
 void SX1272SetAntSw( uint8_t opMode )
@@ -192,15 +201,23 @@ void SX1272SetAntSw( uint8_t opMode )
     switch( opMode )
     {
     case RFLR_OPMODE_TRANSMITTER:
+#ifndef HW_VERSION_3
         GpioWrite( &AntRx, 0 );
         GpioWrite( &AntTx, 1 );
+#else
+        OMuxAntSetTX(&I2c);
+#endif
         break;
     case RFLR_OPMODE_RECEIVER:
     case RFLR_OPMODE_RECEIVER_SINGLE:
     case RFLR_OPMODE_CAD:
     default:
+#ifndef HW_VERSION_3
         GpioWrite( &AntRx, 1 );
         GpioWrite( &AntTx, 0 );
+#else
+        OMuxAntSetRX(&I2c);
+#endif
         break;
     }
 }

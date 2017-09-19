@@ -63,9 +63,8 @@ typedef struct
  * Board MCU pins definitions
  */
 
-// RF LORA 868 connections
 #ifdef HW_VERSION_3
-// TODO: Needs to be checked
+// RF LORA 868 connections
 #define RADIO_MOSI                                  PE_11
 #define RADIO_MISO                                  PE_10
 #define RADIO_SCLK                                  PE_12
@@ -73,14 +72,11 @@ typedef struct
 #define RADIO_RESET                                 PA_2
 
 #define RADIO_DIO_0                                 PC_0
-#define RADIO_DIO_1                                 PD_7
-#define RADIO_DIO_2                                 PC_1
-#define RADIO_DIO_3                                 PD_6
-#define RADIO_DIO_4                                 PA_5
-#define RADIO_DIO_5                                 PD_1
-
-#define RADIO_ANT_SWITCH_TX							PB_11
-#define RADIO_ANT_SWITCH_RX							PD_4
+#define RADIO_DIO_1                                 PC_1
+#define RADIO_DIO_2                                 PB_11
+#define RADIO_DIO_3                                 PD_4
+#define RADIO_DIO_4                                 PD_5
+#define RADIO_DIO_5                                 PA_1
 
 // Wonder Gecko LEDs
 #define LED_0                                       PF_4
@@ -90,11 +86,15 @@ typedef struct
 #define BUTTON_0									PC_9
 #define BUTTON_1									PC_10
 
-#define I2C_SCL                                     NC
-#define I2C_SDA                                     NC
+// I²C pins
+#define I2C_SCL                                     PD_7
+#define I2C_SDA                                     PD_6
+
+// Wonder Gecko temperature and humidity sensor
+#define SI7021_ENABLE								PC_8
 
 #else /*HW_VERSION_1 or HW_VERSION_2 */
-
+// RF LORA 868 connections
 #define RADIO_MOSI                                  PE_11
 #define RADIO_MISO                                  PE_10
 #define RADIO_SCLK                                  PE_12

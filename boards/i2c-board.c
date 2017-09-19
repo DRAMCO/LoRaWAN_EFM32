@@ -14,6 +14,7 @@ Maintainer: Miguel Luis and Gregory Cristian
 */
 #include "board.h"
 #include "i2c-board.h"
+#include "i2cspm.h"
 
 /*!
  *  The value of the maximal timeout for I2C waiting loops
@@ -21,25 +22,21 @@ Maintainer: Miguel Luis and Gregory Cristian
 #define TIMEOUT_MAX                                 0x8000
 
 I2cAddrSize I2cInternalAddrSize = I2C_ADDR_SIZE_8;
-
-/*!
- * MCU I2C peripherals enumeration
- */
-/*
-typedef enum {
-    I2C_1 = ( uint32_t )I2C1_BASE,
-    I2C_2 = ( uint32_t )I2C2_BASE,
-} I2cName;
-*/
+I2CSPM_Init_TypeDef i2cInit = I2CSPM_INIT_DEFAULT;
 
 void I2cMcuInit( I2c_t *obj, PinNames scl, PinNames sda )
 {
-	assert_param(FAIL);
+	// EFM32-specific simple poll-based I2C master init
+	I2CSPM_Init(&i2cInit);
+
+	// Link to stack
+	obj->I2c.Instance = i2cInit.port;
 }
 
 void I2cMcuFormat( I2c_t *obj, I2cMode mode, I2cDutyCycle dutyCycle, bool I2cAckEnable, I2cAckAddrMode AckAddrMode, uint32_t I2cFrequency )
 {
-	assert_param(FAIL);
+	//assert_param(FAIL);
+	return;
 }
 
 void I2cMcuDeInit( I2c_t *obj )
@@ -54,8 +51,20 @@ void I2cSetAddrSize( I2c_t *obj, I2cAddrSize addrSize )
 
 uint8_t I2cMcuWriteBuffer( I2c_t *obj, uint8_t deviceAddr, uint16_t addr, uint8_t *buffer, uint16_t size )
 {
-	assert_param(FAIL);
-	return FAIL;
+	I2C_TransferSeq_TypeDef    seq;
+	I2C_TransferReturn_TypeDef ret;
+
+	seq.addr  = deviceAddr<<1;
+	seq.flags = I2C_FLAG_WRITE;
+	seq.buf[0].data   = buffer;
+	seq.buf[0].len    = size;
+
+	ret = I2CSPM_Transfer(obj->I2c.Instance, &seq);
+	if (ret != i2cTransferDone){
+		return false;
+	}
+
+	return SUCCESS;
 }
 
 uint8_t I2cMcuReadBuffer( I2c_t *obj, uint8_t deviceAddr, uint16_t addr, uint8_t *buffer, uint16_t size )
