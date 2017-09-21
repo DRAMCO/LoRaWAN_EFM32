@@ -197,7 +197,7 @@ static const uint8_t sbox[256]  =  sb_data(f1);
 static const uint8_t isbox[256] = isb_data(f1);
 #endif
 
-#ifndef USE_AES_HW
+#if defined(USE_AES_HW) && (USE_AES_HW == 0)
 static const uint8_t gfm2_sbox[256] = sb_data(f2);
 static const uint8_t gfm3_sbox[256] = sb_data(f3);
 #endif
@@ -374,7 +374,7 @@ static void xor_block( void *d, const void *s )
     ((uint8_t*)d)[15] ^= ((uint8_t*)s)[15];
 #endif
 }
-#ifndef USE_AES_HW
+#if defined(USE_AES_HW) && (USE_AES_HW == 0)
 static void copy_and_key( void *d, const void *s, const void *k )
 {
 #if defined( HAVE_UINT_32T )
@@ -447,7 +447,7 @@ static void inv_shift_sub_rows( uint8_t st[N_BLOCK] )
 
 #endif
 
-#ifndef USE_AES_HW
+#if defined(USE_AES_HW) && (USE_AES_HW == 0)
 #if defined( VERSION_1 )
   static void mix_sub_columns( uint8_t dt[N_BLOCK] )
   { uint8_t st[N_BLOCK];
@@ -578,7 +578,7 @@ return_type aes_encrypt( const uint8_t in[N_BLOCK], uint8_t  out[N_BLOCK], const
  * changes were made to ensure the existing function calls can still be used (regardless of the hardware
  * being used or not).
  */
-#ifdef USE_AES_HW // G.O.: start of mod
+#if defined(USE_AES_HW) && (USE_AES_HW == 1) // G.O.: start of mod
 	EFM_ASSERT(!((uint32_t)in % 4));	// Checks whether "in" buffer uses 32-bit addresses alignment.
 										// If not, operation is halted.
 	EFM_ASSERT(!((uint32_t)out % 4));	// Checks whether "out" buffer uses 32-bit addresses alignment.

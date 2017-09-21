@@ -10,7 +10,7 @@
  *   Gebroeders De Smetstraat 1,
  *   B-9000 Gent, Belgium
  *
- *         File: si7021-board.h
+ *         File: si7021-board.c
  *      Created: 2017-09-19
  *       Author: Geoffrey Ottoy
  *

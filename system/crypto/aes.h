@@ -37,9 +37,14 @@
  *
  * Comment this symbol if you want to use the standard implementation
  */
-//#define USE_AES_HW
 
-#ifdef USE_AES_HW
+#if !defined(USE_AES_HW)
+#warning "USE_AES_HW not defined. Default to software!"
+#define USE_AES_HW	0
+#endif
+
+
+#if defined(USE_AES_HW) && (USE_AES_HW == 1)
 #	include "em_aes.h"
 #	include "em_emu.h"
 #	include "em_cmu.h"

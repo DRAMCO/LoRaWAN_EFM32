@@ -1,7 +1,29 @@
+/*  ____  ____      _    __  __  ____ ___
+ * |  _ \|  _ \    / \  |  \/  |/ ___/ _ \
+ * | | | | |_) |  / _ \ | |\/| | |  | | | |
+ * | |_| |  _ <  / ___ \| |  | | |__| |_| |
+ * |____/|_| \_\/_/   \_\_|  |_|\____\___/
+ *                           research group
+ *                             dramco.be/
+ *
+ *   KU Leuven - Technology Campus Gent,
+ *   Gebroeders De Smetstraat 1,
+ *   B-9000 Gent, Belgium
+ *
+ *         File: example_app.c
+ *      Created: 2017-09-20
+ *       Author: Geoffrey Ottoy
+ *
+ *  Description: Functions to read the EFM32 Wonder Gecko
+ *  	on-board si7021 temperature and humidity sensor.
+ */
+
+#ifdef EXAMPLE_APP
+
 #include <string.h>
 #include <math.h>
 
-#include "Comissioning_geoff.h"
+#include "Comissioning_mydev.h"
 #include "board.h"
 
 #include "LoRaMac.h"
@@ -286,3 +308,5 @@ void Button_0_ISR(void){
 void Button_1_ISR(void){
 	OMuxToggleLed(&I2c);
 }
+
+#endif /* EXAMPLE_APP */

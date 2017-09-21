@@ -43,7 +43,7 @@ DEALINGS WITH THE SOFTWARE
  
 typedef struct _AES_CMAC_CTX {
             aes_context    rijndael;
-#ifdef USE_AES_HW // G.O.: fix to make sure the physical addresses of the following fields are aligned correctly
+#if defined(USE_AES_HW) && (USE_AES_HW == 1) // G.O.: fix to make sure the physical addresses of the following fields are aligned correctly
             uint8_t addressPad[3];
 #endif
             uint8_t        X[16];
