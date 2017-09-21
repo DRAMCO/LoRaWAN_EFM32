@@ -50,7 +50,7 @@ static int32_t Si7021_Measure(I2c_t *obj, uint8_t addr, uint32_t *data, uint8_t 
 /* Reads relative humidity and temperature from a Si7021 sensor.
  *   Returns zero on OK, non-zero otherwise.
  */
-int32_t Si7021_MeasureRHAndTemp(I2c_t *obj, uint32_t *rhData, int32_t *tData){
+int32_t Si7021_MeasureRHAndTemp(I2c_t *obj, uint32_t *rhData, uint32_t *tData){
   int ret = Si7021_Measure(obj, SI7021_ADDR, rhData, SI7021_READ_RH);
 
   if (ret == 2){

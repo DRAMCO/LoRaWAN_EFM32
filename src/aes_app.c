@@ -23,7 +23,7 @@
  *  	compute the MIC). Using the global symbol USE_AES_HW (project settings),
  *  	one can enable hardware encryption.
  *
- *  	Observations (in energy monitor):
+ *  	Observations you should be able to make (in energy monitor):
  *  	 - AES in software:
  *  	 	 duration:  ~ 35 ms
  *  	 	   energy: ~ 445 µJ
@@ -32,6 +32,8 @@
  *  	 	 duration:   ~ 7 ms
  *  	 	   energy:  ~ 91 µJ
  *  	 	code size: 	~ 40 kB
+ *
+*  	 	Try reducing the number of readings. What can you conclude?
  */
 
 #ifdef AES_APP
@@ -51,9 +53,17 @@
 
 #define APP_ENCRYPT_DUTYCYCLE   100		// Milliseconds between two encryptions
 
-#define APP_PORT                1       // Application port
-#define NR_TEMP_READINGS        64      // Size of user data buffer
+#define APP_PORT                1		// Application port
+#define NR_TEMP_READINGS        64		// Size of user data buffer
 #define PHY_MAX_PAYLOAD_SIZE	255
+
+#if defined(USE_AES_HW)
+#if (USE_AES_HW == 1)
+#pragma message("Running AES in hardware.")
+#else
+#pragma message("Running AES in software.")
+#endif
+#endif
 
 typedef enum DeviceState
 {

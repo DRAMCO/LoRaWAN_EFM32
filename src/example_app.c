@@ -14,8 +14,8 @@
  *      Created: 2017-09-20
  *       Author: Geoffrey Ottoy
  *
- *  Description: Functions to read the EFM32 Wonder Gecko
- *  	on-board si7021 temperature and humidity sensor.
+ *  Description: Example application. Measure and accumulate temperature
+ *  	and relative humidity. Periodically send accumulated data.
  */
 
 #ifdef EXAMPLE_APP
@@ -25,22 +25,27 @@
 
 #include "Comissioning_mydev.h"
 #include "board.h"
+#include "omux-board.h"
+#include "si7021-board.h"
 
 #include "LoRaMac.h"
 
 #include <time.h>
 #include <stdlib.h>
 
-#define APP_TX_DUTYCYCLE                    15000   // Milliseconds between two transmissions
-#define APP_TX_DUTYCYCLE_RND                1000    // Random delay for application data transmission duty cycle [ms]
-#define APP_DEFAULT_DATARATE                DR_5    // SF7 - BW125
-#define APP_PORT                            1       // Application port
-#define APP_DATA_SIZE                       2      // Size of packets to transmit in this example
-#define APP_DATA_MAX_SIZE                   64      // Size of user data buffer
-#define APP_ADR_ON                          1       // Whether we use Adaptive Data Rate or not
-#define APP_CONFIRMED_MSG_ON                1       // Whether this example will transmit confirmed or unconfirmed packets
-
-#define RAND_MAX 							30
+#define APP_SENSE_DUTYCYCLE					5000	// Milliseconds between two sensor readings
+#define APP_SENSE_DUTYCYCLE_RND				1000	// Random delay [ms]
+#define APP_DEFAULT_DATARATE				DR_5	// SF7 - BW125
+#define APP_PORT_TEMP						1		// Application port for temperature readings
+#define APP_PORT_RH							2		// Application port for relative humidity
+#define APP_PORT_MIXED						3		// Application port for relative humidity
+#define APP_TEMP_SIZE						2		// Number of bytes in a temperature reading
+#define APP_RH_SIZE							2		// Number of bytes in a relative humidity reading
+#define APP_DATA_TEMP_MAX_SIZE				8		// Size of user data buffer
+#define APP_DATA_RH_MAX_SIZE				8		// Size of user data buffer
+#define APP_DATA_MIXED_MAX_SIZE				18		// Size of user data buffer
+#define APP_ADR_ON                          1		// Whether we use Adaptive Data Rate or not
+#define APP_CONFIRMED_MSG_ON                1		// Whether this example will transmit confirmed or unconfirmed packets
 
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
@@ -53,34 +58,84 @@
 #endif
 
 
-static enum eDevicState
+typedef enum DeviceState
 {
     DEVICE_STATE_INIT,
     DEVICE_STATE_JOIN,
-    DEVICE_STATE_SEND,
+    DEVICE_STATE_SENSE,
     DEVICE_STATE_SLEEP
-} DeviceState;
+} DeviceState_t;
 
-static uint8_t     AppData[APP_DATA_MAX_SIZE]; // User application data
+DeviceState_t devState;
+
 static uint32_t     TxDutyCycleTime;            // Defines the application data transmission duty cycle
 static TimerEvent_t TxNextPacketTimer;          // Timer to handle the application data transmission duty cycle
 static bool         NextTx = true;              // Indicates if a new packet can be sent
 
-static void PrepareTxFrame(uint8_t port){
-		uint32_t tData;
-		uint32_t rhData;
-		Si7021_MeasureRHAndTemp(&I2c, &rhData, &tData);
+static uint8_t tDataBuffer[APP_DATA_TEMP_MAX_SIZE]; // User application data
+static uint8_t rhDataBuffer[APP_DATA_RH_MAX_SIZE]; // User application data
+static uint8_t mixedDataBuffer[APP_DATA_MIXED_MAX_SIZE]; // User application data
+
+uint8_t tBufferPointer;
+uint8_t rhBufferPointer;
+uint8_t senseCounter;
+uint8_t payloadSize;
+uint8_t *payload;
+
+static void AccumulateT(uint32_t tData){
+	if(!(tBufferPointer>APP_DATA_TEMP_MAX_SIZE-APP_TEMP_SIZE)){
 		int16_t temp = (uint16_t)(tData);
-        AppData[0] = (uint8_t)(temp >> 8);
-        AppData[1] = (uint8_t)(temp & 0xFF);
+		*(tDataBuffer+tBufferPointer) = (uint8_t)(temp >> 8);
+		*(tDataBuffer+tBufferPointer+1) = (uint8_t)(temp & 0xFF);
+		tBufferPointer += APP_TEMP_SIZE;
+	}
 }
 
-static bool SendFrame(void)
+static void AccumulateRH(uint32_t rhData){
+	if(!(rhBufferPointer>APP_DATA_RH_MAX_SIZE-APP_RH_SIZE)){
+		int16_t rh = (uint16_t)(rhData);
+		*(rhDataBuffer+rhBufferPointer) = (uint8_t)(rh >> 8);
+		*(rhDataBuffer+rhBufferPointer+1) = (uint8_t)(rh & 0xFF);
+		rhBufferPointer += APP_RH_SIZE;
+	}
+}
+
+static void PrepareTxFrame(uint8_t port){
+	switch(port){
+		case APP_PORT_TEMP: {
+			payload = tDataBuffer;
+			payloadSize = APP_DATA_TEMP_MAX_SIZE;
+			tBufferPointer = 0;
+		} break;
+		case APP_PORT_RH: {
+			payload = rhDataBuffer;
+			payloadSize = APP_DATA_RH_MAX_SIZE;
+			rhBufferPointer = 0;
+		} break;
+		default: {
+			uint8_t mdbPtr = 0;
+			// copy t data
+			mixedDataBuffer[mdbPtr++] = tBufferPointer;
+			memcpy(mixedDataBuffer+mdbPtr, tDataBuffer, tBufferPointer);
+			mdbPtr+=tBufferPointer;
+			// copy rh data
+			mixedDataBuffer[mdbPtr++] = rhBufferPointer;
+			memcpy(mixedDataBuffer+mdbPtr, rhDataBuffer, rhBufferPointer);
+			//
+			payload = mixedDataBuffer;
+			payloadSize = APP_DATA_MIXED_MAX_SIZE;
+			rhBufferPointer = 0;
+			tBufferPointer = 0;
+		} break;
+	}
+}
+
+static bool SendFrame(uint8_t port)
 {
     McpsReq_t mcpsReq;
     LoRaMacTxInfo_t txInfo;
 
-    if (LoRaMacQueryTxPossible(APP_DATA_SIZE, &txInfo) != LORAMAC_STATUS_OK)
+    if (LoRaMacQueryTxPossible(payloadSize, &txInfo) != LORAMAC_STATUS_OK)
     {
         // Send empty frame in order to flush MAC commands
         mcpsReq.Type = MCPS_UNCONFIRMED;
@@ -94,9 +149,9 @@ static bool SendFrame(void)
         {
             // Send a confirmed packet
             mcpsReq.Type = MCPS_CONFIRMED;
-            mcpsReq.Req.Confirmed.fPort = APP_PORT;
-            mcpsReq.Req.Confirmed.fBuffer = AppData;
-            mcpsReq.Req.Confirmed.fBufferSize = APP_DATA_SIZE;
+            mcpsReq.Req.Confirmed.fPort = port;
+            mcpsReq.Req.Confirmed.fBuffer = payload;
+            mcpsReq.Req.Confirmed.fBufferSize = payloadSize;
             mcpsReq.Req.Confirmed.NbTrials = 8;
             mcpsReq.Req.Confirmed.Datarate = APP_DEFAULT_DATARATE;
         }
@@ -104,9 +159,9 @@ static bool SendFrame(void)
         {
             // Send an unconfirmed packet
             mcpsReq.Type = MCPS_UNCONFIRMED;
-            mcpsReq.Req.Unconfirmed.fPort = APP_PORT;
-            mcpsReq.Req.Unconfirmed.fBuffer = AppData;
-            mcpsReq.Req.Unconfirmed.fBufferSize = APP_DATA_SIZE;
+            mcpsReq.Req.Unconfirmed.fPort = port;
+            mcpsReq.Req.Unconfirmed.fBuffer = payload;
+            mcpsReq.Req.Unconfirmed.fBufferSize = payloadSize;
             mcpsReq.Req.Unconfirmed.Datarate = APP_DEFAULT_DATARATE;
         }
     }
@@ -130,11 +185,11 @@ static void OnTxNextPacketTimerEvent(void)
         // If we already joined then transmit data
         if (mibReq.Param.IsNetworkJoined == true)
         {
-            DeviceState = DEVICE_STATE_SEND;
+        	devState = DEVICE_STATE_SENSE;
             NextTx = true;
         }
         else // We need to join before we can send data
-            DeviceState = DEVICE_STATE_JOIN;
+        	devState = DEVICE_STATE_JOIN;
     }
 }
 
@@ -158,7 +213,7 @@ static void MlmeConfirm(MlmeConfirm_t *mlmeConfirm)
     {
         // Check if the node has joined the network
         if (mlmeConfirm->MlmeRequest == MLME_JOIN)
-            DeviceState = DEVICE_STATE_SEND;
+        	devState = DEVICE_STATE_SENSE;
     }
 
     NextTx = true;
@@ -179,11 +234,11 @@ int main_example( void )
 
     srand(time(NULL));   // should only be called once
 
-
-    DeviceState = DEVICE_STATE_INIT;
+    senseCounter = 0;
+    devState = DEVICE_STATE_INIT;
     while (true)
     {
-        switch (DeviceState)
+        switch (devState)
         {
             case DEVICE_STATE_INIT:
             {
@@ -219,7 +274,7 @@ int main_example( void )
                 mibReq.Param.Rx2Channel = (Rx2ChannelParams_t){869525000, DR_3};
                 LoRaMacMibSetRequestConfirm(&mibReq);
 
-                DeviceState = DEVICE_STATE_JOIN;
+                devState = DEVICE_STATE_JOIN;
                 break;
             }
             case DEVICE_STATE_JOIN:
@@ -267,26 +322,63 @@ int main_example( void )
                 mibReq.Param.IsNetworkJoined = true;
                 LoRaMacMibSetRequestConfirm(&mibReq);
 
-                DeviceState = DEVICE_STATE_SEND;
+                devState = DEVICE_STATE_SENSE;
 #endif
                 break;
             }
-            case DEVICE_STATE_SEND:
+            case DEVICE_STATE_SENSE:
             {
-                if (NextTx)
-                {
-                    PrepareTxFrame(APP_PORT);
+            	uint32_t tData;
+            	uint32_t rhData;
+            	uint8_t appPort;
+            	Si7021_MeasureRHAndTemp(&I2c, &rhData, &tData);
+
+            	AccumulateT(tData);
+            	if(senseCounter == 2){
+            		AccumulateRH(rhData);
+            		senseCounter = 0;
+            	}
+            	else{
+            		senseCounter++;
+            	}
+
+            	if((tBufferPointer+rhBufferPointer) >= APP_DATA_MIXED_MAX_SIZE-APP_RH_SIZE-APP_TEMP_SIZE){
+            		// send mixed data packet
+            		NextTx = true;
+            		appPort = APP_PORT_MIXED;
+            	}
+            	else{
+            		if(tBufferPointer == APP_DATA_TEMP_MAX_SIZE){
+            			// send temp data packet
+						NextTx = true;
+						appPort = APP_PORT_TEMP;
+            		}
+            		else{
+            			if(rhBufferPointer == APP_DATA_RH_MAX_SIZE){
+            				// send temp data packet
+							NextTx = true;
+							appPort = APP_PORT_RH;
+            			}
+            			else{
+            				NextTx = false; // don't transmit yet.
+            			}
+            		}
+            	}
+
+                if(NextTx){
+                    PrepareTxFrame(appPort);
                     GpioWrite(&Led1, 1);
-                    NextTx = SendFrame();
+                    //NextTx = SendFrame();
+                    SendFrame(appPort);
                     GpioWrite(&Led1, 0);
                 }
 
-                // Schedule next packet transmission
-                TxDutyCycleTime = APP_TX_DUTYCYCLE + randr(-APP_TX_DUTYCYCLE_RND, APP_TX_DUTYCYCLE_RND);
+                // Schedule next sensor reading
+                TxDutyCycleTime = APP_SENSE_DUTYCYCLE + randr(-APP_SENSE_DUTYCYCLE_RND, APP_SENSE_DUTYCYCLE_RND);
                 TimerSetValue(&TxNextPacketTimer, TxDutyCycleTime);
                 TimerStart(&TxNextPacketTimer);
 
-                DeviceState = DEVICE_STATE_SLEEP;
+                devState = DEVICE_STATE_SLEEP;
                 break;
             }
             case DEVICE_STATE_SLEEP:

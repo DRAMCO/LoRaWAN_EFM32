@@ -26,7 +26,7 @@
 /* Reads relative humidity and temperature from a Si7021 sensor.
  *   Returns zero on OK, non-zero otherwise.
  */
-int32_t Si7021_MeasureRHAndTemp(I2c_t *obj, uint32_t *rhData, int32_t *tData);
+int32_t Si7021_MeasureRHAndTemp(I2c_t *obj, uint32_t *rhData, uint32_t *tData);
 
 
 #endif /* BOARDS_SI7021_BOARD_H_ */
