@@ -34,8 +34,13 @@ int main(void){
 #ifdef AES_APP
 	main_aes();
 #endif
+
 #ifdef EXAMPLE_APP
 	main_example();
+#endif
+
+#ifdef DEEP_SLEEP_APP
+	main_deep_sleep();
 #endif
 	while(1);
 }
