@@ -20,26 +20,26 @@
 
 
 #include "app_select.h"
-#ifdef EXAMPLE_APP
+#if defined(APP_TYPE) && (APP_TYPE == EXAMPLE_APP)
 #include "example_app.h"
 #endif
-#ifdef AES_APP
+#if defined(APP_TYPE) && (APP_TYPE == AES_APP)
 #include "aes_app.h"
 #endif
-#ifdef DEEP_SLEEP_APP
+#if defined(APP_TYPE) && (APP_TYPE == DEEP_SLEEP_APP)
 #include "deep_sleep_app.h"
 #endif
 
 int main(void){
-#ifdef AES_APP
+#if defined(APP_TYPE) && (APP_TYPE == AES_APP)
 	main_aes();
 #endif
 
-#ifdef EXAMPLE_APP
+#if defined(APP_TYPE) && (APP_TYPE == EXAMPLE_APP)
 	main_example();
 #endif
 
-#ifdef DEEP_SLEEP_APP
+#if defined(APP_TYPE) && (APP_TYPE == DEEP_SLEEP_APP)
 	main_deep_sleep();
 #endif
 	while(1);

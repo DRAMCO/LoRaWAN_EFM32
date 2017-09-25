@@ -39,7 +39,10 @@
 									<listOptionValue builtIn="false" value="DEBUG=1"/>
 									<listOptionValue builtIn="false" value="EFM32HG322F64=1"/>
 									<listOptionValue builtIn="false" value="USE_AES_HW=0"/>
-									<listOptionValue builtIn="false" value="DEEP_SLEEP_APP"/>
+									<listOptionValue builtIn="false" value="APP_TYPE=EXAMPLE_APP"/>
+									<listOptionValue builtIn="false" value="EXAMPLE_APP=1"/>
+									<listOptionValue builtIn="false" value="AES_APP=2"/>
+									<listOptionValue builtIn="false" value="DEEP_SLEEP_APP=3"/>
 								</option>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.builtin.349691891" name="Always branch to builtin functions (-fno-builtin)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.builtin" value="true" valueType="boolean"/>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.prolog.900057425" name="Generate debugger-friendly prologs (-mno-sched-prolog)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.prolog" value="true" valueType="boolean"/>

@@ -18,7 +18,7 @@
  *  	and relative humidity. Periodically send accumulated data.
  */
 
-#ifdef EXAMPLE_APP
+#if defined(APP_TYPE) && (APP_TYPE == EXAMPLE_APP)
 
 #include <string.h>
 #include <math.h>

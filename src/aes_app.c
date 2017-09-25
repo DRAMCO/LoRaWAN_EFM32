@@ -36,7 +36,7 @@
 *  	 	Try reducing the number of readings. What can you conclude?
  */
 
-#ifdef AES_APP
+#if defined(APP_TYPE) && (APP_TYPE == AES_APP)
 
 #include <string.h>
 #include <math.h>

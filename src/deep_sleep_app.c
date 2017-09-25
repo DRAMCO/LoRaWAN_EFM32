@@ -18,7 +18,7 @@
  *  	Change line 136
  */
 
-#ifdef DEEP_SLEEP_APP
+#if defined(APP_TYPE) && (APP_TYPE ==DEEP_SLEEP_APP)
 
 #include <string.h>
 #include <math.h>

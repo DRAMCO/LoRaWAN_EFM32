@@ -22,22 +22,24 @@
 #define SRC_APP_SELECT_H_
 
 // define either AES_APP, EXAMPLE_APP or DEEP_SLEEP_APP as global symbols
-#ifndef EXAMPLE_APP
- #ifndef AES_APP
-  #ifndef DEEP_SLEEP_APP
-   #error "No app type was specified."
+#if defined(APP_TYPE)
+ #if (APP_TYPE != EXAMPLE_APP)
+  #if (APP_TYPE != AES_APP)
+   #if (APP_TYPE != DEEP_SLEEP_APP)
+    #error "No app type was specified."
+   #endif
+  #else //AES_APP is defined
+   #if (APP_TYPE == DEEP_SLEEP_APP)
+    #error "Only one app type may be specified."
+   #endif
   #endif
- #else //AES_APP is defined
-  #ifdef DEEP_SLEEP_APP
+ #else
+  #if (APP_TYPE == AES_APP)
    #error "Only one app type may be specified."
   #endif
- #endif
-#else
- #ifdef AES_APP
-  #error "Only one app type may be specified."
- #endif
- #ifdef DEEP_SLEEP_APP
-  #error "Only one app type may be specified."
+  #if (APP_TYPE == DEEP_SLEEP_APP)
+   #error "Only one app type may be specified."
+  #endif
  #endif
 #endif
 
