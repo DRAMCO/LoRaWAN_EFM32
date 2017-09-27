@@ -20,18 +20,25 @@
 
 #if defined(APP_TYPE) && (APP_TYPE == EXAMPLE_APP)
 
+// Standard C libraries
 #include <string.h>
 #include <math.h>
-
-#include "Comissioning_mydev.h"
-#include "board.h"
-#include "omux-board.h"
-#include "si7021-board.h"
-
-#include "LoRaMac.h"
-
 #include <time.h>
 #include <stdlib.h>
+
+// "commissioning_mydev.h" contains keys & IDs associated to your LoRaWAN network application and device.
+#include "Comissioning_mydev.h"
+// "board.h" contains functionality to initialize and interface with the EFM32 and its peripherals
+#include "board.h"
+// "omux-board.h" contains functionality to interface with several lines (outputs) of the expansion board,
+// through the use of the I2C output MUX on the expansion board.
+#include "omux-board.h"
+// "si7021-board.h" offers functionality to interface with the Wonder Gecko on-board temperature and
+// humidity sensor.
+#include "si7021-board.h"
+// "LoRaMac.h" provides access to the LoRaWAN MAC layer functions.
+#include "LoRaMac.h"
+
 
 #define APP_SENSE_DUTYCYCLE					5000	// Milliseconds between two sensor readings
 #define APP_SENSE_DUTYCYCLE_RND				1000	// Random delay [ms]
