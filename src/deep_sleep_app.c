@@ -41,8 +41,7 @@
 // "em_emu.h" provides access to the EMLIB Energy Management Unit (EMU) which allows switching between Energy Modes.
 #include "em_emu.h"
 
-#define APP_SENSE_DUTYCYCLE					5000	// Milliseconds between two sensor readings
-#define APP_SENSE_DUTYCYCLE_RND				1000	// Random delay [ms]
+#define APP_SENSE_DUTYCYCLE					10000	// Milliseconds between two sensor readings
 #define APP_DEFAULT_DATARATE				DR_5	// SF7 - BW125
 #define APP_PORT_TEMP						1		// Application port for temperature readings
 #define APP_PORT_RH							2		// Application port for relative humidity
@@ -55,7 +54,7 @@
 #define APP_DATA_RH_MAX_SIZE				8		// Size of humidity data buffer
 #define APP_DATA_MIXED_MAX_SIZE				18		// Size of mixed data buffer
 #define APP_ADR_ON                          1		// Whether we use Adaptive Data Rate or not
-#define APP_CONFIRMED_MSG_ON                0		// Whether this example will transmit confirmed or unconfirmed packets
+#define APP_CONFIRMED_MSG_ON                1		// Whether this example will transmit confirmed or unconfirmed packets
 
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
@@ -251,7 +250,7 @@ int main_deep_sleep( void )
                 if (NextTx == true)
                     LoRaMacMlmeRequest(&mlmeReq);
 
-                DeviceState = DEVICE_STATE_WAIT;
+                devState = DEVICE_STATE_WAIT;
 #else
                 // Choose a random device address if not already defined in Comissioning.h
                 if (DevAddr == 0)
@@ -286,14 +285,12 @@ int main_deep_sleep( void )
             }
             case DEVICE_STATE_SENSE:
             {
-            	if(NextTx){
-					GpioWrite(&Led1, 1);
-					NextTx = SendFrame();
-					GpioWrite(&Led1, 0);
-				}
+            	GpioWrite(&Led1, 1);
+				SendFrame();
+				GpioWrite(&Led1, 0);
 
 				// Schedule next sensor reading
-				TxDutyCycleTime = APP_SENSE_DUTYCYCLE + randr(-APP_SENSE_DUTYCYCLE_RND, APP_SENSE_DUTYCYCLE_RND);
+				TxDutyCycleTime = APP_SENSE_DUTYCYCLE;
 				TimerSetValue(&TxNextPacketTimer, TxDutyCycleTime);
 				TimerStart(&TxNextPacketTimer);
 

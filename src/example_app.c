@@ -53,7 +53,7 @@
 #define APP_DATA_RH_MAX_SIZE				8		// Size of humidity data buffer
 #define APP_DATA_MIXED_MAX_SIZE				18		// Size of mixed data buffer
 #define APP_ADR_ON                          1		// Whether we use Adaptive Data Rate or not
-#define APP_CONFIRMED_MSG_ON                1		// Whether this example will transmit confirmed or unconfirmed packets
+#define APP_CONFIRMED_MSG_ON                0		// Whether this example will transmit confirmed or unconfirmed packets
 
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
@@ -301,7 +301,7 @@ int main_example( void )
                 if (NextTx == true)
                     LoRaMacMlmeRequest(&mlmeReq);
 
-                DeviceState = DEVICE_STATE_SLEEP;
+                devState = DEVICE_STATE_SLEEP;
 #else
                 // Choose a random device address if not already defined in Comissioning.h
                 if (DevAddr == 0)
