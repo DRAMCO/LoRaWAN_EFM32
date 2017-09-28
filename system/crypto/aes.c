@@ -64,6 +64,13 @@
 
 #include "aes.h"
 
+#if defined(USE_AES_HW) && (USE_AES_HW == 1)
+#	include "em_aes.h"
+#	include "em_cmu.h"
+#	include "em_emu.h"
+#	include "em_assert.h"
+#endif
+
 //#if defined( HAVE_UINT_32T )
 //  typedef unsigned long uint32_t;
 //#endif
@@ -192,6 +199,16 @@
     w(0xf8), w(0xf9), w(0xfa), w(0xfb), w(0xfc), w(0xfd), w(0xfe), w(0xff) }
 
 static const uint8_t sbox[256]  =  sb_data(f1);
+
+/* Aligned memory buffers needed for AES hardware.
+ * Although the documentation [https://siliconlabs.github.io/Gecko_SDK_Doc/efm32g/html/group__AES.html] states that
+ * "The Cortex-M supports unaligned accesses, but with a performance penalty.", using unaligned memory buffers seem
+ * to result in a Hard Fault. Using these aligned buffers fixes that fault.
+ */
+#if defined(USE_AES_HW) && (USE_AES_HW == 1)
+static uint32_t tOut[N_BLOCK/sizeof(uint32_t)];
+static uint32_t tIn[N_BLOCK/sizeof(uint32_t)];
+#endif
 
 #if defined( AES_DEC_PREKEYED )
 static const uint8_t isbox[256] = isb_data(f1);
@@ -579,17 +596,39 @@ return_type aes_encrypt( const uint8_t in[N_BLOCK], uint8_t  out[N_BLOCK], const
  * being used or not).
  */
 #if defined(USE_AES_HW) && (USE_AES_HW == 1) // G.O.: start of mod
-	EFM_ASSERT(!((uint32_t)in % 4));	// Checks whether "in" buffer uses 32-bit addresses alignment.
-										// If not, operation is halted.
-	EFM_ASSERT(!((uint32_t)out % 4));	// Checks whether "out" buffer uses 32-bit addresses alignment.
-										// If not, operation is halted.
-	// You might need to change the length of addressPad in the "AES_CMAC_CTX struct" (cmac.h).
+	int i;
+	uint32_t       *_out; // local pointer to AES output
+	const uint32_t *_in;  // local pointer to AES input
+	const uint32_t *_key = (const uint32_t *)ctx->ksch; // local pointer to AES key
+						  // 32-bit alignment of the key is handled in cmac.h
 
-	int            i;
-	// Hardware requires 32-bit interfacing
-	uint32_t       *_out = (uint32_t *)out;
-	const uint32_t *_in  = (const uint32_t *)in;
-	const uint32_t *_key = (const uint32_t *)ctx->ksch;
+	// Hardware requires 32-bit alignment
+	// re-align when necessary
+	bool reAlignOut = false;
+	bool reAlignIn = false;
+	// check if re-alignment of the output is needed
+	if(((uint32_t)out%4) != 0){
+		reAlignOut = true;
+		_out = tOut; // point local pointer to aligned memory
+	}
+	else{
+		_out = (uint32_t *) out;
+	}
+	// check if re-alignment of the input is needed
+	if(((uint32_t)in%4) != 0){
+		reAlignIn = true;
+		// re-align input
+		for(i=0; i<N_BLOCK/sizeof(uint32_t); i++){
+			*(tIn+i) = *(in+(4*i));
+			*(tIn+i) += (*(in+(4*i)+1) << 8);
+			*(tIn+i) += (*(in+(4*i)+2) << 16);
+			*(tIn+i) += (*(in+(4*i)+3) << 24);
+		}
+		_in = tIn; // point local pointer to aligned memory
+	}
+	else{
+		_in = (const uint32_t *) in;
+	}
 
 	// Enable AES hardware clock
     CMU_ClockEnable(cmuClock_AES, true);
@@ -619,6 +658,16 @@ return_type aes_encrypt( const uint8_t in[N_BLOCK], uint8_t  out[N_BLOCK], const
 	}
 	_out += 4;
 	_in  += 4;
+
+	// copy back to unaligned buffer
+	if(reAlignOut){
+		for(i=0; i<N_BLOCK/sizeof(uint32_t); i++){
+			out[i*4] = tOut[i] & 0x000000FF;
+			out[i*4+1] = (tOut[i]>>8) & 0x000000FF;
+			out[i*4+2] = (tOut[i]>>16) & 0x000000FF;
+			out[i*4+3] = (tOut[i]>>24) & 0x000000FF;
+		}
+	}
 
 	// Disable AES hardware clock
     CMU_ClockEnable(cmuClock_AES, false);

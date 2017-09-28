@@ -51,6 +51,20 @@ bool OMuxToggleLed(I2c_t *obj){
 	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
 }
 
+/* Set the LED on the extension board.
+ */
+bool OMuxLedOn(I2c_t *obj){
+	prevValue |= LED_ON;
+	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+}
+
+/* Clear the LED on the extension board.
+ */
+bool OMuxLedOff(I2c_t *obj){
+	prevValue &= ~LED_ON;
+	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+}
+
 /* Set RF-LORA module in default state
  */
 bool OMuxAntInit(I2c_t * obj){

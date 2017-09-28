@@ -24,6 +24,14 @@
  */
 bool OMuxToggleLed(I2c_t *obj);
 
+/* Set the LED on the extension board.
+ */
+bool OMuxLedOn(I2c_t *obj);
+
+/* Clear the LED on the extension board.
+ */
+bool OMuxLedOff(I2c_t *obj);
+
 /* Set RF-LORA module in default state
  */
 bool OMuxAntInit(I2c_t * obj);
