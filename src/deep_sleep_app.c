@@ -83,8 +83,9 @@ static TimerEvent_t TxNextPacketTimer;          // Timer to handle the applicati
 static bool         NextTx = true;              // Indicates if a new packet can be sent
 
 
-static uint8_t payload[36] = "@GeoffreyOttoy says: Great workshop!";
-static uint8_t payloadLength = 36;
+#define payloadLength 36 //length +1 for the terminating char \0
+static uint8_t payload[payloadLength] = "@GillesCallebaut says: Hello Again!";
+
 
 
 static bool SendFrame()
@@ -108,7 +109,7 @@ static bool SendFrame()
             mcpsReq.Type = MCPS_CONFIRMED;
             mcpsReq.Req.Confirmed.fPort = APP_PORT_BTN;
             mcpsReq.Req.Confirmed.fBuffer = payload;
-            mcpsReq.Req.Confirmed.fBufferSize = payloadLength;
+            mcpsReq.Req.Confirmed.fBufferSize = payloadLength-1; // -1 to exclude the \0 (null terminator) of the string
             mcpsReq.Req.Confirmed.NbTrials = 8;
             mcpsReq.Req.Confirmed.Datarate = APP_DEFAULT_DATARATE;
         }
@@ -118,7 +119,7 @@ static bool SendFrame()
             mcpsReq.Type = MCPS_UNCONFIRMED;
             mcpsReq.Req.Unconfirmed.fPort = APP_PORT_BTN;
             mcpsReq.Req.Unconfirmed.fBuffer = payload;
-            mcpsReq.Req.Unconfirmed.fBufferSize = payloadLength;
+            mcpsReq.Req.Unconfirmed.fBufferSize = payloadLength-1; // -1 to exclude the \0 (null terminator) of the string
             mcpsReq.Req.Unconfirmed.Datarate = APP_DEFAULT_DATARATE;
         }
     }
