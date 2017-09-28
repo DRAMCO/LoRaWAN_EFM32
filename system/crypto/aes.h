@@ -43,14 +43,6 @@
 #define USE_AES_HW	0
 #endif
 
-
-#if defined(USE_AES_HW) && (USE_AES_HW == 1)
-#	include "em_aes.h"
-#	include "em_emu.h"
-#	include "em_cmu.h"
-#	include "em_assert.h"
-#endif
-
 #if 1
 #  define AES_ENC_PREKEYED  /* AES encryption with a precomputed key schedule  */
 #endif

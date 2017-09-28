@@ -53,7 +53,7 @@
 #define APP_DATA_RH_MAX_SIZE				8		// Size of humidity data buffer
 #define APP_DATA_MIXED_MAX_SIZE				18		// Size of mixed data buffer
 #define APP_ADR_ON                          1		// Whether we use Adaptive Data Rate or not
-#define APP_CONFIRMED_MSG_ON                0		// Whether this example will transmit confirmed or unconfirmed packets
+#define APP_CONFIRMED_MSG_ON                1		// Whether this example will transmit confirmed or unconfirmed packets
 
 #if (OVER_THE_AIR_ACTIVATION == 0)
     static uint8_t  NwkSKey[] = LORAWAN_NWKSKEY;
@@ -239,6 +239,7 @@ int main_example( void )
 
     BoardInitMcu();
     BoardInitPeriph();
+    OMuxLedOff(&I2c);
 
     srand(time(NULL));   // should only be called once
 
@@ -291,8 +292,6 @@ int main_example( void )
                 MlmeReq_t mlmeReq;
 
                 // Initialize LoRaMac device unique ID
-                //BoardGetUniqueId(DevEui);
-
                 mlmeReq.Type = MLME_JOIN;
                 mlmeReq.Req.Join.DevEui = DevEui;
                 mlmeReq.Req.Join.AppEui = AppEui;
@@ -341,8 +340,9 @@ int main_example( void )
             	uint8_t appPort;
             	Si7021_MeasureRHAndTemp(&I2c, &rhData, &tData);
 
+            	// Measure temperature every time the device gets in the state "DEVICE_STATE_SENSE"
             	AccumulateT(tData);
-            	if(senseCounter == 2){
+            	if(senseCounter == 2){ // Measure relative humidity every three times
             		AccumulateRH(rhData);
             		senseCounter = 0;
             	}
@@ -376,7 +376,6 @@ int main_example( void )
                 if(NextTx){
                     PrepareTxFrame(appPort);
                     GpioWrite(&Led1, 1);
-                    //NextTx = SendFrame();
                     SendFrame(appPort);
                     GpioWrite(&Led1, 0);
                 }

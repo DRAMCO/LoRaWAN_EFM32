@@ -51,11 +51,13 @@
 // "omux-board.h" contains functionality to interface with several lines (outputs) of the expansion board,
 // through the use of the I2C output MUX on the expansion board.
 #include "omux-board.h"
-// "si7021-board.h" offers functionality to interface with the Wonder Gecko on-board temperature and
+// "si7021-board.h" offers functionality to interface with the Happy Gecko on-board temperature and
 // humidity sensor.
 #include "si7021-board.h"
 // "LoRaMac.h" provides access to the LoRaWAN MAC layer functions.
 #include "LoRaMac.h"
+#include "LoRaMacCrypto.h"
+
 
 #define APP_ENCRYPT_DUTYCYCLE   100		// Milliseconds between two encryptions
 
@@ -106,6 +108,7 @@ int main_aes( void )
     uint32_t mic;
 
     devState = DEVICE_STATE_INIT;
+    //GpioWrite(&Led0, 0);
     while (true)
     {
         switch (devState)
