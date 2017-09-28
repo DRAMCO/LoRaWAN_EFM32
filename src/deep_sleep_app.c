@@ -33,7 +33,7 @@
 // "omux-board.h" contains functionality to interface with several lines (outputs) of the expansion board,
 // through the use of the I2C output MUX on the expansion board.
 #include "omux-board.h"
-// "si7021-board.h" offers functionality to interface with the Wonder Gecko on-board temperature and
+// "si7021-board.h" offers functionality to interface with the Happy Gecko on-board temperature and
 // humidity sensor.
 #include "si7021-board.h"
 // "LoRaMac.h" provides access to the LoRaWAN MAC layer functions.
