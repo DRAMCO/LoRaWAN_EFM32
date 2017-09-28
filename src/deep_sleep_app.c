@@ -40,6 +40,7 @@
 #include "LoRaMac.h"
 // "em_emu.h" provides access to the EMLIB Energy Management Unit (EMU) which allows switching between Energy Modes.
 #include "em_emu.h"
+#include "em_chip.h"
 
 #define APP_SENSE_DUTYCYCLE					10000	// Milliseconds between two sensor readings
 #define APP_DEFAULT_DATARATE				DR_5	// SF7 - BW125
@@ -84,9 +85,7 @@ static bool         NextTx = true;              // Indicates if a new packet can
 
 
 #define payloadLength 36 //length +1 for the terminating char \0
-static uint8_t payload[payloadLength] = "@GillesCallebaut says: Hello Again!";
-
-
+static uint8_t payload[payloadLength] = "@GeoffreyOttoy says: Use the Force!";
 
 static bool SendFrame()
 {
@@ -211,9 +210,10 @@ int main_deep_sleep( void )
                 TimerInit(&TxNextPacketTimer, OnTxNextPacketTimerEvent);
 
                 // Enable or disable Adaptive Data Rate
-                mibReq.Type = MIB_ADR;
-                mibReq.Param.AdrEnable = APP_ADR_ON;
-                LoRaMacMibSetRequestConfirm(&mibReq);
+				mibReq.Type = MIB_ADR;
+				mibReq.Param.AdrEnable = APP_ADR_ON;
+				LoRaMacMibSetRequestConfirm(&mibReq);
+
 
                 // Set whether this is a public or private network
                 mibReq.Type = MIB_PUBLIC_NETWORK;

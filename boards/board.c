@@ -121,7 +121,7 @@ void BoardInitPeriph( void )
 #ifdef HW_VERSION_3
 	/* Enable Si7021 temperature and humidity sensor */
 	GpioInit( &Si7021_Enable, SI7021_ENABLE, PIN_OUTPUT, PIN_PUSH_PULL, PIN_NO_PULL, 1);
-	GpioWrite( &Si7021_Enable, 1 );
+	GpioWrite( &Si7021_Enable, 1 ); // enable
 
 	/* Init I2c */
     I2cInit(&I2c, I2C_SCL, I2C_SDA);

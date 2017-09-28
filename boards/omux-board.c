@@ -46,50 +46,50 @@ uint8_t prevValue = 0x00;
 
 /* Toggle the LED on the extension board.
  */
-bool OMuxToggleLed(I2c_t *obj){
+bool OMuxToggleLed(void){
 	prevValue ^= LED_ON;
-	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+	return OMuxSetValue(OMUX_ADDR, prevValue);
 }
 
 /* Set the LED on the extension board.
  */
-bool OMuxLedOn(I2c_t *obj){
+bool OMuxLedOn(void){
 	prevValue |= LED_ON;
-	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+	return OMuxSetValue(OMUX_ADDR, prevValue);
 }
 
 /* Clear the LED on the extension board.
  */
-bool OMuxLedOff(I2c_t *obj){
+bool OMuxLedOff(void){
 	prevValue &= ~LED_ON;
-	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+	return OMuxSetValue(OMUX_ADDR, prevValue);
 }
 
 /* Set RF-LORA module in default state
  */
-bool OMuxAntInit(I2c_t * obj){
-	return OMuxAntSetRX(obj);
+bool OMuxAntInit(void){
+	return OMuxAntSetRX();
 }
 
 /* Set RF-LORA module in transmit mode
  */
-bool OMuxAntSetTX(I2c_t * obj){
+bool OMuxAntSetTX(void){
 	prevValue &= !(RX_SWITCH_ON);
 	prevValue |= TX_SWITCH_ON;
-	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+	return OMuxSetValue(OMUX_ADDR, prevValue);
 }
 
 /* Set RF-LORA module in receive mode
  */
-bool OMuxAntSetRX(I2c_t * obj){
+bool OMuxAntSetRX(void){
 	prevValue &= !(TX_SWITCH_ON);
 	prevValue |= RX_SWITCH_ON;
-	return OMuxSetValue(obj, OMUX_ADDR, prevValue);
+	return OMuxSetValue(OMUX_ADDR, prevValue);
 }
 
 /* Set new value on the output mux
  */
-bool OMuxSetValue(I2c_t *obj, uint8_t addr, uint8_t value){
-	I2cWrite(obj, addr, 0, value);
+bool OMuxSetValue(uint8_t addr, uint8_t value){
+	I2cWrite(&I2c, addr, 0, value);
 	return true;
 }

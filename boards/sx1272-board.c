@@ -184,7 +184,7 @@ void SX1272AntSwInit( void )
     GpioInit( &AntTx, RADIO_ANT_SWITCH_TX, PIN_OUTPUT, PIN_PUSH_PULL, PIN_PULL_UP, 0 );
     GpioInit( &AntRx, RADIO_ANT_SWITCH_RX, PIN_OUTPUT, PIN_PUSH_PULL, PIN_PULL_UP, 1 );
 #else
-    OMuxAntInit(&I2c);
+    OMuxAntInit();
 #endif
 }
 
@@ -205,7 +205,7 @@ void SX1272SetAntSw( uint8_t opMode )
         GpioWrite( &AntRx, 0 );
         GpioWrite( &AntTx, 1 );
 #else
-        OMuxAntSetTX(&I2c);
+        OMuxAntSetTX();
 #endif
         break;
     case RFLR_OPMODE_RECEIVER:
@@ -216,7 +216,7 @@ void SX1272SetAntSw( uint8_t opMode )
         GpioWrite( &AntRx, 1 );
         GpioWrite( &AntTx, 0 );
 #else
-        OMuxAntSetRX(&I2c);
+        OMuxAntSetRX();
 #endif
         break;
     }

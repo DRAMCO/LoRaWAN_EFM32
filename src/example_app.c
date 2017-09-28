@@ -239,7 +239,7 @@ int main_example( void )
 
     BoardInitMcu();
     BoardInitPeriph();
-    OMuxLedOff(&I2c);
+    OMuxLedOff();
 
     srand(time(NULL));   // should only be called once
 
@@ -338,7 +338,7 @@ int main_example( void )
             	uint32_t tData;
             	uint32_t rhData;
             	uint8_t appPort;
-            	Si7021_MeasureRHAndTemp(&I2c, &rhData, &tData);
+            	Si7021_MeasureRHAndTemp(&rhData, &tData);
 
             	// Measure temperature every time the device gets in the state "DEVICE_STATE_SENSE"
             	AccumulateT(tData);
@@ -405,7 +405,7 @@ void Button_0_ISR(void){
 
 // This function is called when PB1 is pressed
 void Button_1_ISR(void){
-	OMuxToggleLed(&I2c);
+	OMuxToggleLed();
 }
 
 #endif /* EXAMPLE_APP */

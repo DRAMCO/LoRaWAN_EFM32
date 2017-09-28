@@ -147,6 +147,7 @@ extern Gpio_t Led0;
 extern Gpio_t Led1;
 extern Gpio_t Pb0;
 extern Gpio_t Pb1;
+extern Gpio_t Si7021_Enable;
 
 extern void Button_0_ISR(void);
 extern void Button_1_ISR(void);

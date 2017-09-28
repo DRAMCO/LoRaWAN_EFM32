@@ -161,7 +161,7 @@ void Button_0_ISR(void){
 
 // This function is called when PB1 is pressed
 void Button_1_ISR(void){
-	OMuxToggleLed(&I2c);
+	OMuxToggleLed();
 }
 
 #endif /* AES_APP */
