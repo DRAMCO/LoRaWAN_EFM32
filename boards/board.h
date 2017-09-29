@@ -78,11 +78,11 @@ typedef struct
 #define RADIO_DIO_4                                 PD_5
 #define RADIO_DIO_5                                 PA_1
 
-// Wonder Gecko LEDs
+// Happy Gecko LEDs
 #define LED_0                                       PF_4
 #define LED_1                                       PF_5
 
-// Wonder Gecko push buttons
+// Happy Gecko push buttons
 #define BUTTON_0									PC_9
 #define BUTTON_1									PC_10
 
@@ -90,8 +90,11 @@ typedef struct
 #define I2C_SCL                                     PD_7
 #define I2C_SDA                                     PD_6
 
-// Wonder Gecko temperature and humidity sensor
+// Happy Gecko temperature and humidity sensor enable
 #define SI7021_ENABLE								PC_8
+
+// Extension board light sensor interrupt line
+#define ADPS9200_INT								PC_2
 
 #else /*HW_VERSION_1 or HW_VERSION_2 */
 // RF LORA 868 connections
@@ -111,11 +114,11 @@ typedef struct
 #define RADIO_ANT_SWITCH_TX							PB_11
 #define RADIO_ANT_SWITCH_RX							PD_4
 
-// Wonder Gecko LEDs
+// Happy Gecko LEDs
 #define LED_0                                       PF_4
 #define LED_1                                       PF_5
 
-// Wonder Gecko push buttons
+// Happy Gecko push buttons
 #define BUTTON_0									PC_9
 #define BUTTON_1									PC_10
 
@@ -240,5 +243,9 @@ void BoardGetUniqueId( uint8_t *id );
  * \retval value  power source ( 0: USB_POWER,  1: BATTERY_POWER )
  */
 uint8_t GetBoardPowerSource( void );
+
+void Button_0_ISR() __attribute__ ((weak));
+void Button_1_ISR() __attribute__ ((weak));
+void Adps9200_ISR() __attribute__ ((weak));
 
 #endif // __BOARD_H__

@@ -17,7 +17,7 @@ by ST Micro-electronics on the LoRA extension board.
 */
 #include "board.h"
 
-#include "i2c-board.h"
+#include "i2c.h"
 #include "eeprom-board.h"
 
 #define DEVICE_I2C_ADDRESS		0x50
@@ -44,7 +44,7 @@ uint8_t EepromMcuWriteBuffer( uint16_t addr, uint8_t *buffer, uint16_t size )
 	}
 	wBuf[0] = (uint8_t) addr;
 
-	return I2cMcuWriteBuffer( &I2c, I2cDeviceAddr, 0, wBuf, size+1 );
+	return I2cWriteBuffer( &I2c, I2cDeviceAddr, 0, wBuf, size+1 );
 #else
 	return FAIL;
 #endif
@@ -59,7 +59,7 @@ uint8_t EepromMcuReadBuffer( uint16_t addr, uint8_t *buffer, uint16_t size ){
 		return FAIL;
 	}
 
-	return I2cMcuReadBuffer( &I2c, I2cDeviceAddr<<1, addr, buffer, size );
+	return I2cReadBuffer( &I2c, I2cDeviceAddr<<1, addr, buffer, size );
 #else
 	return FAIL;
 #endif
