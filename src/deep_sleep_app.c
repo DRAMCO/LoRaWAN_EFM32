@@ -83,8 +83,8 @@ static uint32_t     TxDutyCycleTime;            // Defines the application data 
 static TimerEvent_t TxNextPacketTimer;          // Timer to handle the application data transmission duty cycle
 static bool         NextTx = true;              // Indicates if a new packet can be sent
 
-static const uint8_t payload[] = "test message";
-#define payloadLength sizeof(payload) //length +1 for the terminating char \0
+static const uint8_t payload[] = "@GillesC: Merci Bartjen";
+#define payloadLength sizeof(payload) -1 // -1 to exclude the null terminator \0 when dealing with strings in C
 
 static bool SendFrame()
 {
@@ -107,7 +107,7 @@ static bool SendFrame()
             mcpsReq.Type = MCPS_CONFIRMED;
             mcpsReq.Req.Confirmed.fPort = APP_PORT_BTN;
             mcpsReq.Req.Confirmed.fBuffer = payload;
-            mcpsReq.Req.Confirmed.fBufferSize = payloadLength-1; // -1 to exclude the \0 (null terminator) of the string
+            mcpsReq.Req.Confirmed.fBufferSize = payloadLength;
             mcpsReq.Req.Confirmed.NbTrials = 8;
             mcpsReq.Req.Confirmed.Datarate = APP_DEFAULT_DATARATE;
         }
@@ -117,7 +117,7 @@ static bool SendFrame()
             mcpsReq.Type = MCPS_UNCONFIRMED;
             mcpsReq.Req.Unconfirmed.fPort = APP_PORT_BTN;
             mcpsReq.Req.Unconfirmed.fBuffer = payload;
-            mcpsReq.Req.Unconfirmed.fBufferSize = payloadLength-1; // -1 to exclude the \0 (null terminator) of the string
+            mcpsReq.Req.Unconfirmed.fBufferSize = payloadLength;
             mcpsReq.Req.Unconfirmed.Datarate = APP_DEFAULT_DATARATE;
         }
     }

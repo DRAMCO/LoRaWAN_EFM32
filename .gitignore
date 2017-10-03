@@ -54,3 +54,4 @@ GNU ARM v4.9.3 - Debug/**/*
 *.prefs
 *.cproject
 .project
+*.prefs
