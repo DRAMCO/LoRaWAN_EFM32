@@ -18,7 +18,7 @@
  *  	Change line 136
  */
 
-#if defined(APP_TYPE) && (APP_TYPE ==DEEP_SLEEP_APP)
+#if defined(APP_TYPE) && (APP_TYPE == DEEP_SLEEP_APP)
 
 // Standard C libraries
 #include <string.h>
@@ -83,9 +83,8 @@ static uint32_t     TxDutyCycleTime;            // Defines the application data 
 static TimerEvent_t TxNextPacketTimer;          // Timer to handle the application data transmission duty cycle
 static bool         NextTx = true;              // Indicates if a new packet can be sent
 
-
-#define payloadLength 36 //length +1 for the terminating char \0
-static uint8_t payload[payloadLength] = "@GeoffreyOttoy says: Use the Force!";
+static const uint8_t payload[] = "test message";
+#define payloadLength sizeof(payload) //length +1 for the terminating char \0
 
 static bool SendFrame()
 {
