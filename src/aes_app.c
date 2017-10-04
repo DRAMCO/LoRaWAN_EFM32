@@ -24,14 +24,14 @@
  *  	one can enable hardware encryption.
  *
  *  	Observations you should be able to make (in energy monitor):
- *  	 - AES in software:
- *  	 	 duration:  ~ 35 ms
- *  	 	   energy: ~ 445 µJ
- *  	 	code size: 	~ 42 kB
- *  	 - AES in hardware:
- *  	 	 duration:   ~ 7 ms
- *  	 	   energy:  ~ 91 µJ
- *  	 	code size: 	~ 40 kB
+ *		 - AES in software:
+ *			*  duration:  	~ 37 ms
+ *			*    energy: 	~ 285 µJ
+ *			* code size: 	~ 42 kB
+ *		 - AES in hardware:
+ *			*  duration:   	~ 7 ms
+ *			*    energy:  	~ 60 µJ
+ *			* code size: 	~ 40 kB
  *
 *  	 	Try reducing the number of readings. What can you conclude?
  */
@@ -62,7 +62,7 @@
 #define APP_ENCRYPT_DUTYCYCLE   100		// Milliseconds between two encryptions
 
 #define APP_PORT                1		// Application port
-#define NR_TEMP_READINGS        64		// Size of user data buffer
+#define NR_TEMP_READINGS        64		// Size of user data buffer max = PHY_MAX_PAYLOAD_SIZE/2
 #define PHY_MAX_PAYLOAD_SIZE	255
 
 #if defined(USE_AES_HW)

@@ -43,7 +43,7 @@
 #include "em_chip.h"
 
 
-#error Change the payload. Be creative! Comment this line out afterwards
+//#error Change the payload. Be creative! Comment this line out afterwards
 static const uint8_t payload[] = "@GillesC says: Wonderful Tutorial!";
 #define payloadLength sizeof(payload) -1 // -1 to exclude the null terminator \0 when dealing with strings in C
 
