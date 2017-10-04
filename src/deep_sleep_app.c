@@ -42,6 +42,11 @@
 #include "em_emu.h"
 #include "em_chip.h"
 
+
+#error Change the payload. Be creative! Comment this line out afterwards
+static const uint8_t payload[] = "@GillesC says: Wonderful Tutorial!";
+#define payloadLength sizeof(payload) -1 // -1 to exclude the null terminator \0 when dealing with strings in C
+
 #define APP_SENSE_DUTYCYCLE					10000	// Milliseconds between two sensor readings
 #define APP_DEFAULT_DATARATE				DR_5	// SF7 - BW125
 #define APP_PORT_TEMP						1		// Application port for temperature readings
@@ -82,9 +87,6 @@ DeviceState_t devState;
 static uint32_t     TxDutyCycleTime;            // Defines the application data transmission duty cycle
 static TimerEvent_t TxNextPacketTimer;          // Timer to handle the application data transmission duty cycle
 static bool         NextTx = true;              // Indicates if a new packet can be sent
-
-static const uint8_t payload[] = "@GillesC: Merci Bartjen";
-#define payloadLength sizeof(payload) -1 // -1 to exclude the null terminator \0 when dealing with strings in C
 
 static bool SendFrame()
 {
