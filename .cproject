@@ -34,15 +34,15 @@
 							<tool id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.base.726490444" name="GNU ARM C Compiler" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option id="gnu.c.compiler.option.optimization.level.1766901940" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" value="gnu.c.optimization.level.none" valueType="enumerated"/>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.def.symbols.2050336215" name="Defined symbols (-D)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.def.symbols" valueType="definedSymbols">
-									<listOptionValue builtIn="false" value="USE_BAND_868=1"/>
 									<listOptionValue builtIn="false" value="HW_VERSION_3"/>
 									<listOptionValue builtIn="false" value="DEBUG=1"/>
 									<listOptionValue builtIn="false" value="EFM32HG322F64=1"/>
-									<listOptionValue builtIn="false" value="APP_TYPE=AES_APP"/>
+									<listOptionValue builtIn="false" value="APP_TYPE=EXAMPLE_APP"/>
 									<listOptionValue builtIn="false" value="EXAMPLE_APP=1"/>
 									<listOptionValue builtIn="false" value="AES_APP=2"/>
 									<listOptionValue builtIn="false" value="DEEP_SLEEP_APP=3"/>
-									<listOptionValue builtIn="false" value="USE_AES_HW=1"/>
+									<listOptionValue builtIn="false" value="USE_AES_HW=0"/>
+									<listOptionValue builtIn="false" value="USE_BAND_915=1"/>
 								</option>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.builtin.349691891" name="Always branch to builtin functions (-fno-builtin)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.builtin" value="true" valueType="boolean"/>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.prolog.900057425" name="Generate debugger-friendly prologs (-mno-sched-prolog)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.prolog" value="true" valueType="boolean"/>
@@ -97,6 +97,22 @@
 							<tool id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.archiver.base.1551292545" name="GNU ARM Archiver" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.archiver.base"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt.debug#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:4.9.3.20150529.2147228425" name="LoRaMac.c" rcbsApplicability="disable" resourcePath="mac/LoRaMac.c" toolsToInvoke="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.base.726490444.1134999512">
+						<tool id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.base.726490444.1134999512" name="GNU ARM C Compiler" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.base.726490444">
+							<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.def.symbols.1721541142" name="Defined symbols (-D)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.def.symbols" valueType="definedSymbols">
+								<listOptionValue builtIn="false" value="HW_VERSION_3"/>
+								<listOptionValue builtIn="false" value="DEBUG=1"/>
+								<listOptionValue builtIn="false" value="EFM32HG322F64=1"/>
+								<listOptionValue builtIn="false" value="APP_TYPE=EXAMPLE_APP"/>
+								<listOptionValue builtIn="false" value="EXAMPLE_APP=1"/>
+								<listOptionValue builtIn="false" value="AES_APP=2"/>
+								<listOptionValue builtIn="false" value="DEEP_SLEEP_APP=3"/>
+								<listOptionValue builtIn="false" value="USE_AES_HW=0"/>
+								<listOptionValue builtIn="false" value="USE_BAND_915=1"/>
+							</option>
+							<inputType id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.input.1942456110" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.input"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
 						<entry excluding="DOC/I2C_OutputMux|.git/objects/info|.git/refs/tags" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
