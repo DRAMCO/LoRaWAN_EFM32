@@ -19,7 +19,7 @@ Maintainer: Miguel Luis and Gregory Cristian
  * When set to 1 the application uses the Over-the-Air activation procedure
  * When set to 0 the application uses the Personalization activation procedure
  */
-#define OVER_THE_AIR_ACTIVATION                     0
+#define OVER_THE_AIR_ACTIVATION                     1
 
 /*!
  * Indicates if the end-device is to be connected to a private or public network
@@ -31,12 +31,14 @@ Maintainer: Miguel Luis and Gregory Cristian
  * The EUIs are used to identify all of the (virtual) parts of the LoRaWAN inside the backend server.
  * 
  */
-#define LORAWAN_DEVICE_EUI                          { 0x00, 0x80, 0x77, 0x31, 0x37, 0xB4, 0x8E, 0xE1 }
+#define LORAWAN_DEVICE_EUI                          { 0x00, 0x76, 0xFB, 0xB5, 0x1B, 0x91, 0xA7, 0x92 }
 /*!
  * 64 bit eapplication identifier, EUI-64 (unique)
  */
 #define LORAWAN_APPLICATION_EUI                     { 0x70, 0xB3, 0xD5, 0x7E, 0xF0, 0x00, 0x63, 0x66 }
 
+
+#if OVER_THE_AIR_ACTIVATION == 0
 /*!
  * Device address on the network (big endian)
  * This device address is a non-unique 32-bit adres
@@ -58,11 +60,12 @@ Maintainer: Miguel Luis and Gregory Cristian
  */
 #define LORAWAN_APPSKEY                             { 0xA3, 0xC7, 0x8F, 0x27, 0x2A, 0x26, 0xF3, 0x9D, 0xD2, 0x59, 0x5D, 0x3A, 0x1F, 0x6D, 0xFE, 0x25 }
 
+#endif
 
 /*!
  * AES encryption/decryption cipher application key
  */
-#define LORAWAN_APPLICATION_KEY                     { 0x70, 0xB6, 0xB6, 0xE3, 0x2B, 0xF2, 0x05, 0x37, 0x37, 0x89, 0x2A, 0xAE, 0x79, 0xE0, 0xD7, 0x73 }
+#define LORAWAN_APPLICATION_KEY                     { 0x19, 0x54, 0x4D, 0xB9, 0x89, 0x33, 0x75, 0xC0, 0xCB, 0x4C, 0x1E, 0xEE, 0xB6, 0xAA, 0x76, 0x65 }
 /*!
  * Current network ID
  */
