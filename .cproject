@@ -42,7 +42,7 @@
 									<listOptionValue builtIn="false" value="AES_APP=2"/>
 									<listOptionValue builtIn="false" value="DEEP_SLEEP_APP=3"/>
 									<listOptionValue builtIn="false" value="USE_AES_HW=0"/>
-									<listOptionValue builtIn="false" value="USE_BAND_915=1"/>
+									<listOptionValue builtIn="false" value="USE_BAND_868"/>
 								</option>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.builtin.349691891" name="Always branch to builtin functions (-fno-builtin)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.builtin" value="true" valueType="boolean"/>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.prolog.900057425" name="Generate debugger-friendly prologs (-mno-sched-prolog)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.debug.prolog" value="true" valueType="boolean"/>
@@ -108,7 +108,7 @@
 								<listOptionValue builtIn="false" value="AES_APP=2"/>
 								<listOptionValue builtIn="false" value="DEEP_SLEEP_APP=3"/>
 								<listOptionValue builtIn="false" value="USE_AES_HW=0"/>
-								<listOptionValue builtIn="false" value="USE_BAND_915=1"/>
+								<listOptionValue builtIn="false" value="USE_BAND_868"/>
 							</option>
 							<inputType id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.input.1942456110" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.input"/>
 						</tool>
