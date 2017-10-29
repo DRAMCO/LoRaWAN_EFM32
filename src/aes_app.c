@@ -65,6 +65,16 @@
 #define NR_TEMP_READINGS        64		// Size of user data buffer max = PHY_MAX_PAYLOAD_SIZE/2
 #define PHY_MAX_PAYLOAD_SIZE	255
 
+#ifndef LORAWAN_DEVICE_ADDRESS
+#define LORAWAN_DEVICE_ADDRESS                      ( uint32_t )0xB105F00D
+#endif
+#ifndef LORAWAN_NWKSKEY
+#define LORAWAN_NWKSKEY                             { 0x44, 0x52, 0x41, 0x4d, 0x43, 0x4f, 0x69, 0x73, 0x74, 0x68, 0x65, 0x62, 0x65, 0x73, 0x74, 0x21 }
+#endif
+#ifndef LORAWAN_APPSKEY
+#define LORAWAN_APPSKEY                             { 0x2d, 0x47, 0x65, 0x6f, 0x66, 0x66, 0x72, 0x65, 0x79, 0x20, 0x4f, 0x74, 0x74, 0x6f, 0x79, 0x2d }
+#endif
+
 #if defined(USE_AES_HW)
 #if (USE_AES_HW == 1)
 #pragma message("Running AES in hardware.")
