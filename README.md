@@ -1,4 +1,9 @@
 # LoRaWAN_EFM32
+
+
+[![DOI](https://zenodo.org/badge/97035915.svg)](https://zenodo.org/badge/latestdoi/97035915)
+
+
 LoRaMAC implementation based on the Semtech implemenation for the EFM32 Happy Gecko develop board.
 Developed by [DRAMCO](http://www.dramco.be).
 
