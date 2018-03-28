@@ -29,6 +29,7 @@ Gpio_t Pb0;
 Gpio_t Pb1;
 
 Gpio_t Si7021_Enable;
+Gpio_t Adps9200_Int;
 
 Adc_t Adc;
 I2c_t I2c;
@@ -122,6 +123,10 @@ void BoardInitPeriph( void )
 	/* Enable Si7021 temperature and humidity sensor */
 	GpioInit( &Si7021_Enable, SI7021_ENABLE, PIN_OUTPUT, PIN_PUSH_PULL, PIN_NO_PULL, 1);
 	GpioWrite( &Si7021_Enable, 1 ); // enable
+
+	/* Setup interrupt for ADPS 9200 light sensor */
+	GpioInit( &Adps9200_Int, ADPS9200_INT, PIN_INPUT, PIN_PUSH_PULL, PIN_NO_PULL, 1 );
+	GpioSetInterrupt(&Adps9200_Int, IRQ_FALLING_EDGE, IRQ_LOW_PRIORITY, &Adps9200_ISR );
 
 	/* Init I2c */
     I2cInit(&I2c, I2C_SCL, I2C_SDA);
