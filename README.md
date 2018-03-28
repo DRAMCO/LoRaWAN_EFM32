@@ -3,6 +3,8 @@ LoRaMAC implementation based on the SEMTECH implemenation for the EFM32 Happy Ge
 Developed by [DRAMCO](http://www.dramco.be).
 More information soon.
 
+![LoRaWAN EFM32 module](./extension_board.png)
+
 ## Reducing power consumption of IoT nodes: a hands-on
 This project will be used in hands-on sessions to let attendees experience the development of low power IoT nodes.
 ### More information about these sessions
