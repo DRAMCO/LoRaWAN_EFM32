@@ -284,10 +284,7 @@ void RtcRecoverMcuStatus( void )
  ******************************************************************************/
 void RTC_IRQHandler(void)
 {
-	// Retrieve flags. We 'OR' this with the enabled interrupts since the COMP1 flag may be set if it
-	// wasn't used before (compare register == 0 -> IFS flag set regardless of whether interrupt is enabled)
-	// By ANDing with the IEN we make sure we only consider the flags of the ENABLED interrupts
-	uint32_t flags = (RTC_IntGet() & RTC->IEN);
+	uint32_t flags = RTC_IntGetEnabled();
 	RTC_IntClear(RTC_IFC_OF | RTC_IFC_COMP0);
 
 	// Check for overflow
