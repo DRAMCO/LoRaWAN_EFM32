@@ -18,3 +18,14 @@ The module was used in the following tutorials:
 The hands-on can be found [here](dramco.be/tutorials/low-power-iot) with the corresponding [presentation](https://www.slideshare.net/GillesCallebaut/low-power-wireless-technologies-for-connecting-embedded-sensors-in-the-iot-a-journey-from-fundaments-to-handson-90398582).
 
 The DRAMCO LoRa module features a Semtech SX1272 Radio chip and an EFM32 Cortex M0 processor. 
+
+
+## How to cite
+```LaTex
+@Misc{lorawan-efm32,
+  author =   {G. Ottoy and G. Leenders and G. Callebaut},
+  title =    {{LoRaWAN EFM32}},
+  url = {https://github.com/DRAMCO/LoRaWAN_EFM32},
+  note = {doi: \url{10.5281/zenodo.1209414}}
+}
+```
